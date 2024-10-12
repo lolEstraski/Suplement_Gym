@@ -1,9 +1,9 @@
-<?php if(isset($_SESSION['aciertoiniciarsesion'])) : ?>
+<?php if (isset($_SESSION['aciertoiniciarsesion'])) : ?>
     <div id="alerta2" class="position-absolute col-6">
         <div>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Informacion: </strong>
-                <?=$_SESSION['aciertoiniciarsesion']?>
+                <strong>Información: </strong>
+                <?= $_SESSION['aciertoiniciarsesion'] ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
@@ -11,19 +11,63 @@
 <?php endif; ?>
 <?php helps::deleteSession('aciertoiniciarsesion'); ?>
 
-<div class="m-5">
-    <div class="text-center">
+<div class="container my-5">
+    <div class="text-center mb-4">
         <h1>Gestiones</h1>
+        <p class="lead">Seleccione una opción para gestionar</p>
     </div>
-    <br>
-    <ul id="gestionesAdmin">
-        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementUsers?>">Gestion de usuarios</a></li>
-        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementGenres?>">Gestion de generos</a></li>
-        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementDepartments?>">Gestion de departamentos</a></li>
-        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementPurchasingStatus?>">Gestion de estados de compra</a></li>
-        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementBankEntities?>">Gestion de entidades bancarias</a></li>
-        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementNews?>">Gestion de noticias</a></li>
-        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementProducts?>">Gestion de productos</a></li>
-        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowAddUserAdmin?>">Asignar Fundadores</a></li>
-    </ul>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="<?= init ?><?= administrator ?><?= windowManagementUsers ?>" class="d-flex justify-content-between align-items-center text-decoration-none">
+                        <span class="fs-5">Gestión de usuarios</span>
+                        <span class="badge bg-primary rounded-pill">🔧</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="<?= init ?><?= administrator ?><?= windowManagementGenres ?>" class="d-flex justify-content-between align-items-center text-decoration-none">
+                        <span class="fs-5">Gestión de géneros</span>
+                        <span class="badge bg-primary rounded-pill">🔧</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="<?= init ?><?= administrator ?><?= windowManagementDepartments ?>" class="d-flex justify-content-between align-items-center text-decoration-none">
+                        <span class="fs-5">Gestión de departamentos</span>
+                        <span class="badge bg-primary rounded-pill">🔧</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="<?= init ?><?= administrator ?><?= windowManagementPurchasingStatus ?>" class="d-flex justify-content-between align-items-center text-decoration-none">
+                        <span class="fs-5">Gestión de estados de compra</span>
+                        <span class="badge bg-primary rounded-pill">🔧</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="<?= init ?><?= administrator ?><?= windowManagementBankEntities ?>" class="d-flex justify-content-between align-items-center text-decoration-none">
+                        <span class="fs-5">Gestión de entidades bancarias</span>
+                        <span class="badge bg-primary rounded-pill">🔧</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="<?= init ?><?= administrator ?><?= windowManagementNews ?>" class="d-flex justify-content-between align-items-center text-decoration-none">
+                        <span class="fs-5">Gestión de noticias</span>
+                        <span class="badge bg-primary rounded-pill">🔧</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="<?= init ?><?= administrator ?><?= windowManagementProducts ?>" class="d-flex justify-content-between align-items-center text-decoration-none">
+                        <span class="fs-5">Gestión de productos</span>
+                        <span class="badge bg-primary rounded-pill">🔧</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="<?= init ?><?= administrator ?><?= windowAddUserAdmin ?>" class="d-flex justify-content-between align-items-center text-decoration-none">
+                        <span class="fs-5">Asignar Fundadores</span>
+                        <span class="badge bg-primary rounded-pill">🔧</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
