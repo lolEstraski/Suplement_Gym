@@ -1,0 +1,93 @@
+<?php if(isset($_SESSION['errorregistro'])) : ?>
+    <div class="alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3" role="alert" style="z-index: 1050;">
+        <strong>Información: </strong><?=$_SESSION['errorregistro']?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('errorregistro'); ?>
+
+<div class="container py-5">
+    <h2 class="text-center mb-4">Formulario de registro de producto</h2>
+    <form action="<?=init?><?=administrator?><?=registerProductAdmin?>" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <div class="row g-4">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Precio</label>
+                            <input type="number" name="price" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="units" class="form-label">Unidades</label>
+                            <input type="number" name="units" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Contenido</label>
+                            <input type="text" name="content" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input type="number" name="stock" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción</label>
+                            <textarea name="description" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <img id="imgPreview" class="img-fluid mb-3 d-block mx-auto" src="assets/images/logos/drink.png" alt="Vista previa de imagen" style="max-height: 200px;">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Subir foto del producto</label>
+                            <input class="form-control" id="formFile" type="file" name="image" accept="image/*" required onchange="previewImage(event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Crear Producto</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .form-control:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+</style>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('imgPreview');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Bootstrap form validation
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>

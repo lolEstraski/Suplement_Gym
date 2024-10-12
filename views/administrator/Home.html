@@ -1,0 +1,29 @@
+<?php if(isset($_SESSION['aciertoiniciarsesion'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['aciertoiniciarsesion']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoiniciarsesion'); ?>
+
+<div class="m-5">
+    <div class="text-center">
+        <h1>Gestiones</h1>
+    </div>
+    <br>
+    <ul id="gestionesAdmin">
+        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementUsers?>">Gestion de usuarios</a></li>
+        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementGenres?>">Gestion de generos</a></li>
+        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementDepartments?>">Gestion de departamentos</a></li>
+        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementPurchasingStatus?>">Gestion de estados de compra</a></li>
+        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementBankEntities?>">Gestion de entidades bancarias</a></li>
+        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementNews?>">Gestion de noticias</a></li>
+        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowManagementProducts?>">Gestion de productos</a></li>
+        <li class="mb-5 fs-2"><a href="<?=init?><?=administrator?><?=windowAddUserAdmin?>">Asignar Fundadores</a></li>
+    </ul>
+</div>

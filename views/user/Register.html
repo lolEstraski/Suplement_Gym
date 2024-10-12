@@ -1,0 +1,100 @@
+<!-- Mostrar alerta mejorada si hay error en el registro -->
+<?php if (isset($_SESSION['erroregistro'])) : ?>
+    <div class="alerta-custom position-fixed top-0 start-50 translate-middle-x col-6 mt-3">
+        <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+            <strong>Información: </strong> <?= $_SESSION['erroregistro'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('erroregistro'); ?>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Formulario de Registro</h2>
+    <form action="<?= init . user . registerUser ?>" method="post" enctype="multipart/form-data" class="p-4 bg-light rounded shadow">
+        <div class="row">
+            <div class="col-md-7">
+                <!-- Campo Nombre -->
+                <div class="form-group mb-3">
+                    <label for="nameu">Nombre <i class="bi bi-person ms-1"></i></label>
+                    <input type="text" name="nameu" class="form-control" placeholder="Ingrese su nombre" required>
+                </div>
+
+                <!-- Campo Apellidos -->
+                <div class="form-group mb-3">
+                    <label for="surname">Apellidos <i class="bi bi-people ms-1"></i></label>
+                    <input type="text" name="surname" class="form-control" placeholder="Ingrese sus apellidos" required>
+                </div>
+
+                <!-- Campo Fecha de Nacimiento -->
+                <div class="form-group mb-3">
+                    <label for="birthdate">Fecha de Nacimiento <i class="bi bi-calendar ms-1"></i></label>
+                    <input type="date" name="birthdate" class="form-control" required>
+                </div>
+
+                <!-- Campo Género -->
+                <div class="form-group mb-3">
+                    <label for="genre">Género <i class="bi bi-gender-ambiguous ms-1"></i></label>
+                    <select name="genre" class="form-control" required>
+                        <?php foreach ($listGenres as $genres) : ?>
+                            <option value="<?= $genres['GENRE_ID'] ?>"><?= $genres['NAME'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <!-- Campo Teléfono -->
+                <div class="form-group mb-3">
+                    <label for="phone">Teléfono <i class="bi bi-telephone ms-1"></i></label>
+                    <input type="number" name="phone" class="form-control" placeholder="Ingrese su número de teléfono" required>
+                </div>
+
+                <!-- Campo Correo -->
+                <div class="form-group mb-3 position-relative">
+                    <label for="email">Correo <i class="bi bi-envelope ms-1"></i></label>
+                    <input type="email" name="email" class="form-control" placeholder="Ingrese su correo electrónico" required>
+                    <small class="form-text text-muted position-absolute end-0 me-4">Debe ser único</small>
+                </div>
+
+                <!-- Campo Clave -->
+                <div class="form-group mb-3 position-relative">
+                    <label for="password">Clave <i class="bi bi-key ms-1"></i></label>
+                    <input type="password" name="password" class="form-control" placeholder="Ingrese su clave" required>
+                    <small class="form-text text-muted position-absolute end-0 me-4">Mínimo 6 caracteres</small>
+                </div>
+            </div>
+
+            <!-- Sección para subir foto de perfil -->
+            <div class="col-md-4 text-center mt-4 mt-md-0">
+                <img id="imgRegister" class="img-fluid rounded-circle shadow-sm mb-3" src="assets/images/logos/Usuario.png" alt="Usuario">
+                <div class="form-group mb-3">
+                    <label for="formFile" class="form-label">Subir Foto de Perfil</label>
+                    <input class="form-control" id="formFile" type="file" name="image" accept="image/*" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de Registro -->
+        <div class="d-flex justify-content-center mt-4">
+            <button type="submit" class="btn btn-success w-50">Registrar</button>
+        </div>
+    </form>
+</div>
+
+<!-- Estilos personalizados para mejorar la apariencia -->
+<style>
+    .alerta-custom {
+        z-index: 1050;
+    }
+    form {
+        border-radius: 10px;
+    }
+    .form-control {
+        border-radius: 8px;
+    }
+    .btn-success {
+        border-radius: 8px;
+    }
+    .bi {
+        font-size: 1.2rem;
+    }
+</style>

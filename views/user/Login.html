@@ -1,0 +1,45 @@
+<div class="container-fluid py-4"></div>
+    <div class="row justify-content-center align-items-center" style="min-height: 85vh;">
+        <div class="col-md-5 col-lg-4 mb-4 mb-md-0">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4" id="loginText">INICIO DE SESIÓN</h2>
+                    
+                    <?php if(isset($_SESSION['iniciarsesionerror']) || isset($_SESSION['logoutm'])) : ?>
+                        <div class="alert <?= isset($_SESSION['iniciarsesionerror']) ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
+                            <strong><?= isset($_SESSION['iniciarsesionerror']) ? 'Error: ' : 'Información: ' ?></strong>
+                            <?= isset($_SESSION['iniciarsesionerror']) ? $_SESSION['iniciarsesionerror'] : $_SESSION['logoutm'] ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php 
+                        helps::deleteSession('iniciarsesionerror');
+                        helps::deleteSession('logoutm');
+                        ?>
+                    <?php endif; ?>
+
+                    <form action="<?=init?><?=user?><?=login?>" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Tu contraseña" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-lg-4 d-flex flex-column justify-content-center">
+            <img src="resources/imagesProducts/legacy.jpg" alt="Suplementos" class="img-fluid rounded shadow mb-3" style="max-height: 400px; object-fit: cover;">
+            <h2 class="text-center mb-2">Bienvenido a M MIPROTEINA</h2>
+            <p class="text-center">Obtén los mejores suplementos al mejor precio y emprende tu propio negocio.</p>
+        </div>
+    </div>
+</div>

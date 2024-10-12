@@ -1,0 +1,103 @@
+<head>
+    <link rel="stylesheet" href="assets/styles/styles.css">
+</head>
+<?php $information = Helps::showUserInformation(); ?>
+
+<div class="container py-5">
+    <h2 class="text-center mb-5">Mi Perfil</h2>
+
+    <?php
+    $alertMessages = [
+        'erroreliminar' => ['danger', 'Error al eliminar'],
+        'aciertoactualizar' => ['success', 'Actualización exitosa'],
+        'erroractualizar' => ['danger', 'Error al actualizar']
+    ];
+
+    foreach ($alertMessages as $session => $data) :
+        if (isset($_SESSION[$session])) : ?>
+            <div class="alert alert-<?= $data[0] ?> alert-dismissible fade show" role="alert">
+                <strong><?= $data[1] ?>: </strong><?= $_SESSION[$session] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+            helps::deleteSession($session);
+        endif;
+    endforeach;
+    ?>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form action="<?=init?><?=user?><?=updateUser?>" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="mb-3 row">
+                            <label for="code" class="col-sm-3 col-form-label">Código</label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <input type="text" id="code" class="form-control" value="<?=$information['CODE']?>" disabled>
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Este es el código con el cual podrás formar parte del negocio">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="name" class="col-sm-3 col-form-label">Nombre</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="name" name="name" class="form-control" value="<?=$information['NAME']?>" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="surname" class="col-sm-3 col-form-label">Apellidos</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="surname" name="surname" class="form-control" value="<?=$information['SURNAME']?>" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="phone" class="col-sm-3 col-form-label">Teléfono</label>
+                            <div class="col-sm-9">
+                                <input type="tel" id="phone" name="phone" class="form-control" value="<?=$information['PHONE']?>" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="email" class="col-sm-3 col-form-label">Correo</label>
+                            <div class="col-sm-9">
+                                <input type="email" id="email" name="email" class="form-control" value="<?=$information['EMAIL']?>" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <img src="resources/imagesUsers/<?=$information['IMAGE']?>" alt="Foto de perfil" class="img-fluid rounded-circle mb-3" style="width: 200px; height: 200px; object-fit: cover;">
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Actualizar foto de perfil</label>
+                            <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success w-100">Actualizar Datos</button>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn btn-danger w-100" data-id="<?=$_SESSION['loginsucces']['USER_ID']?>">Eliminar Cuenta</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="<?=init?><?=user?><?=windowChangePassword?>" class="btn btn-primary w-100">Cambiar clave</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('[data-bs-toggle="tooltip"]').tooltip()
+    })
+</script>

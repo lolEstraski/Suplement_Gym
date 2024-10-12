@@ -1,0 +1,61 @@
+<!-- Mostrar alerta mejorada si hay un error al actualizar -->
+<?php if (isset($_SESSION['erroractualizar'])) : ?>
+    <div class="alerta-custom position-fixed top-0 start-50 translate-middle-x col-6 mt-3">
+        <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+            <strong>Información: </strong> <?= $_SESSION['erroractualizar'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('erroractualizar'); ?>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <h2 class="text-center mb-4">Actualizar Dirección</h2>
+            <form action="<?= init . direction . updateDirection ?>&id=<?= $direction['DIRECTION_ID'] ?>" method="post" enctype="multipart/form-data" class="p-4 bg-light rounded shadow">
+                <div class="form-group mb-3">
+                    <label for="carrer">Carrera <i class="bi bi-signpost ms-1"></i></label>
+                    <input type="text" name="carrer" value="<?= $direction['CARRER'] ?>" class="form-control" placeholder="Ingrese la carrera" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="street">Calle <i class="bi bi-signpost-2 ms-1"></i></label>
+                    <input type="number" name="street" value="<?= $direction['STREET'] ?>" class="form-control" placeholder="Ingrese la calle" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="postal_code">Código Postal <i class="bi bi-mailbox ms-1"></i></label>
+                    <input type="number" name="postal_code" value="<?= $direction['POSTAL_CODE'] ?>" class="form-control" placeholder="Ingrese el código postal" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="direction">Dirección <i class="bi bi-map ms-1"></i></label>
+                    <input type="text" name="direction" value="<?= $direction['DIRECTION'] ?>" class="form-control" placeholder="Ingrese la dirección completa" required>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success w-50">Actualizar Datos</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 col-md-3 text-center mt-4 mt-md-0">
+            <img id="imgRegister" class="img-fluid rounded-circle shadow-sm" src="assets/images/logos/Map.png" alt="Mapa">
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .alerta-custom {
+        z-index: 1050; /* Asegura que la alerta esté visible sobre otros elementos */
+    }
+    form {
+        border-radius: 8px;
+    }
+    .form-control {
+        border-radius: 6px;
+    }
+    .btn-success {
+        border-radius: 6px;
+    }
+    .bi {
+        font-size: 1.2rem;
+    }
+</style>

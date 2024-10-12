@@ -1,0 +1,38 @@
+<?php if(isset($_SESSION['errorregistro'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Información: </strong>
+            <?=$_SESSION['errorregistro']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('errorregistro'); ?>
+
+<div class="container mt-5 p-4 bg-light rounded shadow">
+    <div class="row g-4 align-items-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Formulario de Registro Banco</h2>
+            <form action="<?=init?><?=pay?><?=registerPay?>" method="post">
+                <div class="mb-3">
+                    <label for="entity" class="form-label">Entidad Bancaria</label>
+                    <select name="entity" id="entity" class="form-select" required>
+                        <?php foreach($listBankEntities as $banksEntities) : ?>
+                            <option value="<?=$banksEntities['BANKING_ENTITY_ID']?>"><?=$banksEntities['NAME']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="electionNumber" class="form-label">Número De La Elección</label>
+                    <input type="number" name="electionNumber" id="electionNumber" class="form-control" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg mt-3">Crear</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 text-center">
+            <img id="imgRegister" class="img-fluid rounded shadow-sm" src="assets/images/logos/pagos.png" alt="Imagen de Pago" style="max-width: 80%; height: auto;">
+        </div>
+    </div>
+</div>

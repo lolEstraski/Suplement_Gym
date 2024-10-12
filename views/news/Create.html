@@ -1,0 +1,48 @@
+<?php if(isset($_SESSION['errorregistro'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['errorregistro']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('errorregistro'); ?>
+
+<div class="col-12 p-5 m-1 row">
+    <h2 class="text-center">Formulario de registro</h2>
+    <br>
+    <br>
+    <form action="<?=init?><?=news?><?=registerNews?>" method="post" enctype="multipart/form-data">
+        <div class="col-12 row">
+            <div class="col-6 me-5">
+                <div class="form-group">
+                    <label for="title">Titulo</label>
+                    <input type="text" name="title" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="content">Contenido</label>
+                    <input type="text" name="content" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="link">Link</label>
+                    <input type="text" name="link" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-4">
+                <img id="imgRegister" class="d-block" src="assets/images/logos/noticia.png" alt="">
+                <br>
+                <label for="formFile" class="form-label">Subir foto de perfil</label>
+                <input class="form-control" id="formFile" type="file" name="image" accept="image/*" required>
+            </div>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-success" value="Crear">
+        </div>
+    </form>
+</div>

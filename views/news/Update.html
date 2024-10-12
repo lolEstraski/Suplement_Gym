@@ -1,0 +1,91 @@
+<?php if(isset($_SESSION['erroractualizar'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['erroractualizar']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('erroractualizar'); ?>
+
+<?php if(isset($_SESSION['aciertoactualizar'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['aciertoactualizar']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoactualizar'); ?>
+
+<div class="col-12 p-5 m-1 row">
+    <h2 class="text-center">Actualizar</h2>
+    <br>
+    <br>
+    <br>
+    <form action="<?=init?><?=news?><?=updateNews?>&id=<?=$news['NEWS_ID']?>" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-7">
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Titulo
+                            </span>
+                        </div>
+                        <input type="text" name="title" value="<?=$news['TITLE']?>" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Contenido
+                            </span>
+                        </div>
+                        <input type="text" name="content" value="<?=$news['CONTENT']?>" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Contenido
+                            </span>
+                        </div>
+                        <input type="text" name="link" value="<?=$news['LINK']?>" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="col-12 row">
+                    <div class="col-6">
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="btn btn-success" value="Actualizar Datos">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-3"></div>
+                <img id="imgRegister" class="img-fluid"
+                    src="resources/imagesNews/<?=$news['IMAGE']?>" alt="">
+                <br>
+                <label for="formFile" class="form-label">Actualizar foto de perfil</label>
+                <input class="form-control" id="formFile" type="file" name="image" accept="image/*">
+            </div>
+        </div>
+    </form>
+</div>
