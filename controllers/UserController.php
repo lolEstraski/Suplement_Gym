@@ -114,7 +114,7 @@
                         /*Crear sesion de inicio de sesion exitoso*/
                         $_SESSION['loginsucces'] = $resultado;
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Helps::createSessionAndRedirect("aciertoiniciosesion", "Has ingresado exitosamente a EDUARD ENERGY DRINKS", "?controller=productController&action=windowProducts");
+                        Helps::createSessionAndRedirect("aciertoiniciosesion", "Has ingresado exitosamente a Suplement_Gym", "?controller=productController&action=windowProducts");
                     /*De lo contrario*/
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
@@ -220,7 +220,7 @@
                                     /*Crear sesion de inicio de sesion exitoso*/
                                     $_SESSION['loginsucces'] = $resultado;
                                     /*Crear la sesion y redirigir a la ruta pertinente*/
-                                    Helps::createSessionAndRedirect("aciertoiniciosesion", "Bienvenido a EDUARD ENERGY DRINKS", "?controller=productController&action=windowProducts");
+                                    Helps::createSessionAndRedirect("aciertoiniciosesion", "Bienvenido ", "?controller=productController&action=windowProducts");
                                 /*De lo contrario*/
                                 }else{
                                     /*Crear la sesion y redirigir a la ruta pertinente*/

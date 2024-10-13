@@ -1,23 +1,32 @@
 <div class="m-5">
     <h1 class="text-center mt-5 mb-5">Todas las noticias</h1>
-    <!-- Noticias -->
-    <div class="col-md-6">
-        <div class="p-4 bg-light rounded-3 h-100">
-            <?php foreach($listNews as $list) : ?>
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="https://via.placeholder.com/300" class="img-fluid rounded" alt="Imagen de la noticia 1">
-                </div>
-                <div class="col-md-8">
-                    <div class="container-fluid py-3">
-                        <h2 class="fw-bold">Título de la Noticia 1</h2>
-                        <p class="fs-5">Este es un breve resumen de la noticia 1, que ofrece un pequeño adelanto
-                            para atraer al lector.</p>
-                        <a href="#" class="btn btn-primary">Leer más</a>
+    <!-- Carrusel de Noticias -->
+    <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <?php foreach($listNews as $index => $news) : ?>
+            <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="<?= $news['IMAGE_LINK'] ?? 'https://via.placeholder.com/300' ?>" class="img-fluid rounded" alt="Imagen de la noticia">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="container-fluid py-3">
+                            <h2 class="fw-bold"><?= htmlspecialchars($news['TITLE']) ?></h2>
+                            <p class="fs-5"><?= htmlspecialchars($news['SUMMARY']) ?></p>
+                            <a href="<?= $news['LINK'] ?>" class="btn btn-primary">Leer más</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
     </div>
 </div>

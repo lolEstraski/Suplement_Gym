@@ -1,33 +1,39 @@
-<?php if(isset($_SESSION['errorregistro'])) : ?>
+<!-- Mensaje de alerta de error -->
+<?php if (isset($_SESSION['errorregistro'])) : ?>
     <div id="alerta2" class="position-absolute col-6">
         <div>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Informacion: </strong>
+                <strong>Información: </strong>
                 <?=$_SESSION['errorregistro']?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     </div>
+    <?php helps::deleteSession('errorregistro'); ?>
 <?php endif; ?>
-<?php helps::deleteSession('errorregistro'); ?>
 
-<div class="col-12 p-5 m-1 row">
-    <div class="col-7 me-4">
-        <h2 class="text-center">Formulario de registro</h2>
-        <br>
-        <br>
-        <form action="<?=init?><?=purchasingStatus?><?=registerPurchasingStatus?>" method="post">
-            <div class="form-group">
-                <label for="psname">Nombre</label>
-                <input type="text" name="psname" class="form-control" required>
+<!-- Contenedor principal del formulario -->
+<div class="container mt-5">
+    <div class="card mx-auto shadow-sm p-4" style="max-width: 900px;">
+        <div class="row g-4">
+            <!-- Columna del formulario -->
+            <div class="col-lg-8">
+                <h2 class="text-center text-black">Formulario de registro</h2>
+                <hr>
+                <form action="<?=init?><?=purchasingStatus?><?=registerPurchasingStatus?>" method="post">
+                    <div class="form-group mb-3">
+                        <label for="psname" class="form-label">Nombre</label>
+                        <input type="text" name="psname" class="form-control" required>
+                    </div>
+                    <div class="text-center mt-3">
+                        <input type="submit" class="btn btn-success" value="Crear">
+                    </div>
+                </form>
             </div>
-            <br>
-            <div class="d-flex justify-content-center">
-                <input type="submit" class="btn btn-success" value="Crear">
+            <!-- Columna de la imagen -->
+            <div class="col-lg-4 d-flex align-items-center justify-content-center">
+                <img id="imgRegister" class="img-fluid" src="assets/images/logos/EST.png" alt="Imagen Estado">
             </div>
-        </form>
-    </div>
-    <div class="col-3">
-        <img id="imgRegister" class="d-block" src="assets/images/logos/estado.png" alt="">
+        </div>
     </div>
 </div>

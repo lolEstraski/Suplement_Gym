@@ -1,48 +1,42 @@
-<?php if(isset($_SESSION['errorregistro'])) : ?>
+<!-- Mensajes de Notificación -->
+<?php if (isset($_SESSION['errorregistro'])) : ?>
     <div id="alerta2" class="position-absolute col-6">
         <div>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Informacion: </strong>
-                <?=$_SESSION['errorregistro']?>
+                <strong>Error: </strong>
+                <?= $_SESSION['errorregistro'] ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
     </div>
-<?php endif; ?>
-<?php helps::deleteSession('errorregistro'); ?>
+<?php helps::deleteSession('errorregistro'); endif; ?>
 
-<div class="col-12 p-5 m-1 row">
-    <h2 class="text-center">Formulario de registro</h2>
-    <br>
-    <br>
-    <form action="<?=init?><?=news?><?=registerNews?>" method="post" enctype="multipart/form-data">
-        <div class="col-12 row">
-            <div class="col-6 me-5">
-                <div class="form-group">
-                    <label for="title">Titulo</label>
+<div class="container mt-5">
+    <div class="row p-4 justify-content-center">
+        <div class="col-md-7 me-4 bg-light rounded shadow-sm p-4">
+            <h2 class="text-center text-black">Formulario de Registro</h2>
+            <form action="<?= init ?><?= news ?><?= registerNews ?>" method="post" enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                    <label for="title" class="form-label">Título</label>
                     <input type="text" name="title" class="form-control" required>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="content">Contenido</label>
+                <div class="form-group mb-3">
+                    <label for="content" class="form-label">Contenido</label>
                     <input type="text" name="content" class="form-control" required>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="link">Link</label>
+                <div class="form-group mb-3">
+                    <label for="link" class="form-label">Link</label>
                     <input type="text" name="link" class="form-control" required>
                 </div>
-            </div>
-            <div class="col-4">
-                <img id="imgRegister" class="d-block" src="assets/images/logos/noticia.png" alt="">
-                <br>
-                <label for="formFile" class="form-label">Subir foto de perfil</label>
-                <input class="form-control" id="formFile" type="file" name="image" accept="image/*" required>
-            </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5">Crear</button>
+                </div>
+            </form>
         </div>
-        <br>
-        <div class="d-flex justify-content-center">
-            <input type="submit" class="btn btn-success" value="Crear">
+        <div class="col-md-4 d-flex align-items-center">
+            <img id="imgRegister" class="img-fluid rounded shadow-sm" src="assets/images/logos/noticias.png" alt="Imagen de Noticia">
+            <label for="formFile" class="form-label">Subir foto de perfil</label>
+            <input class="form-control mb-3" id="formFile" type="file" name="image" accept="image/*" required>
         </div>
-    </form>
+    </div>
 </div>
