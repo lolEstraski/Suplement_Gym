@@ -2309,3 +2309,5 @@ COMMIT;
 
 -- Verificar la inserción
 SELECT * FROM ADMINISTRATORS;
+
+DELETE FROM news;
