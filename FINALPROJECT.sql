@@ -2300,14 +2300,14 @@ INSERT INTO ADMINISTRATORS (ADMINISTRATOR_ID, EMAIL, ADMINISTRATOR_PASSWORD, CRE
 VALUES (
     1, -- ADMINISTRATOR_ID (asumiendo que es el primer administrador)
     'admin@gmail.com', -- EMAIL
-    '123', -- ADMINISTRATOR_PASSWORD (debe ser cambiada después de la primera conexión)
+    '123', -- ADMINISTRATOR_PASSWORD (debe ser cambiada despuï¿½s de la primera conexiï¿½n)
     SYSDATE -- CREATED_AT (fecha y hora actuales)
 );
 
--- Confirmar la transacción
+-- Confirmar la transacciï¿½n
 COMMIT;
 
--- Verificar la inserción
+-- Verificar la inserciï¿½n
 SELECT * FROM ADMINISTRATORS;
 
 DELETE FROM news;

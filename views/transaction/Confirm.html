@@ -1,102 +1,122 @@
-<div class="container mt-5 mx-2">
+<div class="container mt-5">
     <!-- Encabezado -->
     <div class="text-center mb-5">
-        <h2>Resumen</h2>
+        <h2>Resumen de la Compra</h2>
     </div>
-    <!-- Datos del vendedor -->
-    <h3 class="mb-3">Datos del Vendedor</h3>
-    <div class="row mb-4">
-        <?php foreach($list as $listCar) : ?>
-            <div class="col-md-6">
-                <p><strong>Nombre:</strong> <?= $listCar['NAME_SELLER'] ?? 'Administrador' ?></p>
-                <?php if($listCar['NAME_SELLER'] != NULL) : ?>
-                    <p><strong>Apellidos:</strong> <?= $listCar['SURNAME'] ?></p>
-                    <p><strong>Email:</strong> <?= $listCar['EMAIL'] ?></p>
-                    <p><strong>Teléfono:</strong> <?= $listCar['PHONE'] ?></p>
-                <?php endif; ?>
+
+    <!-- Tarjeta de Datos del Vendedor -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Datos del Vendedor</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <?php foreach($list as $listCar) : ?>
+                    <div class="col-md-6">
+                        <p><strong>Nombre:</strong> <?= $listCar['NAME_SELLER'] ?? 'Administrador' ?></p>
+                        <?php if($listCar['NAME_SELLER'] != NULL) : ?>
+                            <p><strong>Apellidos:</strong> <?= $listCar['SURNAME'] ?></p>
+                            <p><strong>Email:</strong> <?= $listCar['EMAIL'] ?></p>
+                            <p><strong>Teléfono:</strong> <?= $listCar['PHONE'] ?></p>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
             </div>
-        <?php endforeach; ?>
-    </div>
-    
-    <!-- Datos del envío -->
-    <h3 class="mb-3">Datos del Envío</h3>
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <p><strong>Carrera:</strong> <?= $direction['CARRER'] ?></p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Calle:</strong> <?= $direction['STREET'] ?></p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Código Postal:</strong> <?= $direction['POSTAL_CODE'] ?></p>
-        </div>
-        <div class="col-md-12">
-            <p><strong>Dirección:</strong> <?= $direction['DIRECTION'] ?></p>
         </div>
     </div>
 
-    <!-- Datos del pago -->
-    <h3 class="mb-3">Datos del Pago</h3>
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <p><strong>Elección:</strong> <?= $pay['NAME'] ?></p>
+    <!-- Tarjeta de Datos del Envío -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Datos del Envío</h3>
         </div>
-        <div class="col-md-6">
-            <p><strong>Número:</strong> <?= $pay['NUMBER_ELECTION'] ?></p>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <p><strong>Carrera:</strong> <?= $direction['CARRER'] ?></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Calle:</strong> <?= $direction['STREET'] ?></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Código Postal:</strong> <?= $direction['POSTAL_CODE'] ?></p>
+                </div>
+                <div class="col-md-12">
+                    <p><strong>Dirección Completa:</strong> <?= $direction['DIRECTION'] ?></p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Datos del producto -->
-    <h3 class="mb-3">Datos del Producto</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Contenido</th>
-                <th>Unidades</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($list as $listCar) : ?>
-                <tr>
-                    <td><?= $listCar['NAME_PRODUCT'] ?></td>
-                    <td><?= $listCar['PRICE'] ?></td>
-                    <td><?= $listCar['CONTENT'] ?></td>
-                    <td><?= $listCar['AMOUNT'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <!-- Tarjeta de Datos del Pago -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Datos del Pago</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Método de Pago:</strong> <?= $pay['NAME'] ?></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Número de Elección:</strong> <?= $pay['NUMBER_ELECTION'] ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Total -->
-    <h3 class="text-end mt-4">Total: <?= $total ?></h3>
-    <br>
-    <div class="text-center">
+    <!-- Tabla de Datos del Producto -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Productos en el Carrito</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Contenido</th>
+                        <th>Unidades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($list as $listCar) : ?>
+                        <tr>
+                            <td><?= $listCar['NAME_PRODUCT'] ?></td>
+                            <td><?= $listCar['PRICE'] ?></td>
+                            <td><?= $listCar['CONTENT'] ?></td>
+                            <td><?= $listCar['AMOUNT'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Total y Botones de Acción -->
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h3>Total: <?= $total ?></h3>
         <form id="purchaseForm" action="<?= init ?><?= transaction ?><?= purchase ?>" method="post">
             <input type="hidden" name="id_direction" value="<?= $idDirection ?>">
             <input type="hidden" name="id_pay" value="<?= $idPay ?>">
             <input type="hidden" name="total" value="<?= $total ?>">
-            <button type="button" class="btn btn-primary" id="openModalBtn">Realizar compra</button>
+            <button type="button" class="btn btn-primary" id="openModalBtn">Realizar Compra</button>
         </form>
-        <br>
-        <br>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal de Confirmación -->
 <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="infoModalLabel">Compra Exitosa</h5>
-                <!-- Elimina el botón de cierre -->
             </div>
             <div class="modal-body">
-                <?php echo "La compra se ha realizado exitosamente"; ?>
+                <p>La compra se ha realizado exitosamente. ¡Gracias por su compra!</p>
             </div>
             <div class="modal-footer">
-                <!-- Único botón para confirmar y enviar el formulario -->
                 <button type="button" class="btn btn-primary" id="confirmPurchase">Confirmar</button>
             </div>
         </div>

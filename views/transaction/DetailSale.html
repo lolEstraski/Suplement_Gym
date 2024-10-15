@@ -1,72 +1,92 @@
-<div class="container mt-5 mx-2">
+<div class="container mt-5">
     <!-- Encabezado -->
     <div class="text-center mb-5">
         <h2>Factura</h2>
         <p class="text-muted">Fecha: <?= date('d-m-Y') ?></p>
     </div>
-    <!-- Datos del envío -->
-    <h4 class="mb-3">Datos del Envío</h4>
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <p><strong>De:</strong> <?= $detail[0]['CITY'] ?></p>
+
+    <!-- Tarjeta de Datos del Envío -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Datos del Envío</h4>
         </div>
-        <div class="col-md-4">
-            <p><strong>Ciudad:</strong> <?= $detail[0]['CITY'] ?></p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Carrera:</strong> <?= $detail[0]['CARRER'] ?></p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Calle:</strong> <?= $detail[0]['STREET'] ?></p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Código Postal:</strong> <?= $detail[0]['POSTAL_CODE'] ?></p>
-        </div>
-    </div>
-    <!-- Datos del pago -->
-    <h4 class="mb-3">Datos del Pago</h4>
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <p><strong>Entidad Bancaria:</strong> <?= $detail[0]['BANK_ENTITY_NAME'] ?></p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Número de elección:</strong> <?= $detail[0]['NUMBER_ELECTION'] ?></p>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <p><strong>De:</strong> <?= $detail[0]['CITY'] ?></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Ciudad:</strong> <?= $detail[0]['CITY'] ?></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Carrera:</strong> <?= $detail[0]['CARRER'] ?></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Calle:</strong> <?= $detail[0]['STREET'] ?></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Código Postal:</strong> <?= $detail[0]['POSTAL_CODE'] ?></p>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Datos del producto -->
-    <h4 class="mb-3">Datos del Producto</h4>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Comprador</th>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Contenido</th>
-                <th>Unidades</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($detail as $listCar) : ?>
-            <tr>
-                <td>
-                    <?php if($listCar['USER_NAME'] == NULL) : ?>
-                    Administrador
-                    <?php else : ?>
-                    <?= $listCar['USER_NAME'] . ' ' . $listCar['SURNAME'] ?>
-                    <?php endif; ?>
-                </td>
-                <td><?= $listCar['PRODUCT_NAME'] ?></td>
-                <td><?= $listCar['PRICE'] ?></td>
-                <td><?= $listCar['CONTENT'] ?></td>
-                <td><?= $listCar['UNITS'] ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+
+    <!-- Tarjeta de Datos del Pago -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Datos del Pago</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Entidad Bancaria:</strong> <?= $detail[0]['BANK_ENTITY_NAME'] ?></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Número de Elección:</strong> <?= $detail[0]['NUMBER_ELECTION'] ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjeta de Datos del Producto -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Datos del Producto</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Comprador</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Contenido</th>
+                        <th>Unidades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($detail as $listCar) : ?>
+                    <tr>
+                        <td>
+                            <?php if($listCar['USER_NAME'] == NULL) : ?>
+                            Administrador
+                            <?php else : ?>
+                            <?= $listCar['USER_NAME'] . ' ' . $listCar['SURNAME'] ?>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= $listCar['PRODUCT_NAME'] ?></td>
+                        <td><?= $listCar['PRICE'] ?></td>
+                        <td><?= $listCar['CONTENT'] ?></td>
+                        <td><?= $listCar['UNITS'] ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- Total -->
-    <br>
     <div class="text-end mt-4">
         <h3>Total: <?= $total ?></h3>
     </div>
-    <br>
 </div>

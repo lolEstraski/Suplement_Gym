@@ -1,58 +1,43 @@
-<?php if(isset($_SESSION['errorcarrito'])) : ?>
+<?php if (isset($_SESSION['errorcarrito'])) : ?>
     <div id="alerta2" class="position-absolute col-6">
-        <div>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Informacion: </strong>
-                <?=$_SESSION['errorcarrito']?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Información:</strong> <?= $_SESSION['errorcarrito'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
 <?php endif; ?>
 <?php helps::deleteSession('errorcarrito'); ?>
 
-<div class="col-12 row mt-5 mb-5">
-    <div class="col-6">
-        <img class="d-block" src="resources/imagesProducts/<?=$resultado['IMAGE']?>" alt="" width="500px" height="400px">
+<div class="row mt-5 mb-5">
+    <!-- Imagen del producto -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <img src="resources/imagesProducts/<?= $resultado['IMAGE'] ?>" alt="<?= $resultado['NAME'] ?>" class="img-fluid" style="max-width: 500px; max-height: 400px;">
     </div>
-    <div class="col-4">
-        <h2>
-            <?=$resultado['NAME']?>
-        </h2>
-        <br>
-        <h3>Unidades disponibles:
-            <?=$resultado['STOCK']?>
-        </h3>
-        <br>
-        <h3>Precio:
-            <?=$resultado['PRICE']?>
-            </h4>
-            <br>
-            <h4>Contenido:
-                <?=$resultado['CONTENT']?>
-            </h4>
-            <br>
-            <p>Descripcion:
-                <?=$resultado['DESCRIPTION']?>
-            </p>
-            <br>
-            <?php if(isset($_SESSION['loginsucces'])) : ?>
-                <form action="<?=init?><?=transaction?><?=registerCar?>" method="post">
-                    <input type="hidden" name="idProduct" value="<?=$resultado['PRODUCT_ID']?>">
-                    <input type="hidden" name="vendedor" value="<?=$resultado['USER_ID']?>">
-                    <div class="form-group">
-                        <label for="cantidad">Cantidad</label>
-                        <input type="number" name="cantidad" class="form-control" placeholder="Ingresa la cantidad" max="<?=$resultado['STOCK']?>" required>
-                    </div>
-                    <br>
-                    <div class="d-flex justify-content-center">
-                        <input type="submit" class="btn btn-primary" value="Comprar ahora">
-                    </div>
-                </form>
-            <?php else : ?>
-                <div>
-                    <h5>Inicia sesion o registrate para poder realizar la compra</h5>
+    <!-- Información del producto -->
+    <div class="col-md-6">
+        <h2 class="mb-3"><?= $resultado['NAME'] ?></h2>
+        <h4 class="mb-2">Unidades disponibles: <span class="text-muted"><?= $resultado['STOCK'] ?></span></h4>
+        <h4 class="mb-2">Precio: <span class="text-muted"><?= $resultado['PRICE'] ?></span></h4>
+        <h5 class="mb-2">Contenido: <span class="text-muted"><?= $resultado['CONTENT'] ?></span></h5>
+        <p class="mb-4"><strong>Descripción:</strong> <?= $resultado['DESCRIPTION'] ?></p>
+
+        <!-- Formulario para comprar -->
+        <?php if (isset($_SESSION['loginsucces'])) : ?>
+            <form action="<?= init . transaction . registerCar ?>" method="post">
+                <input type="hidden" name="idProduct" value="<?= $resultado['PRODUCT_ID'] ?>">
+                <input type="hidden" name="vendedor" value="<?= $resultado['USER_ID'] ?>">
+                <div class="form-group mb-3">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad" class="form-control" placeholder="Ingresa la cantidad" max="<?= $resultado['STOCK'] ?>" required>
                 </div>
-            <?php endif; ?>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Comprar ahora</button>
+                </div>
+            </form>
+        <?php else : ?>
+            <div class="alert alert-info mt-4" role="alert">
+                <h5>Inicia sesión o regístrate para poder realizar la compra.</h5>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
