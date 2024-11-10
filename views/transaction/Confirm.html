@@ -1,120 +1,174 @@
-<div class="container mt-5 mx-2">
-    <!-- Encabezado -->
-    <div class="text-center mb-5">
-        <h2>Resumen</h2>
+<div class="container py-5">
+    <!-- Encabezado de Factura -->
+    <div class="card shadow-lg border-0 mb-4">
+        <div class="card-body">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-6">
+                    <img src="assets/images/logos/logoT.png" alt="Logo" class="img-fluid" style="max-height: 100px;">
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h2 class="mb-1">FACTURA DE COMPRA</h2>
+                    <p class="text-muted mb-1">Fecha: <?= date('d/m/Y') ?></p>
+                    <p class="text-muted mb-0">No. Factura: <?= 'INV-' . rand(10000, 99999) ?></p>
+                </div>
+            </div>
+            
+            <!-- Información de Envío -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title border-bottom pb-2">
+                                <i class="fas fa-shipping-fast me-2"></i>Información de Envío
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <p class="mb-1"><strong>Carrera:</strong></p>
+                                    <p class="text-muted"><?= $direction['CARRER'] ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="mb-1"><strong>Calle:</strong></p>
+                                    <p class="text-muted"><?= $direction['STREET'] ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="mb-1"><strong>Código Postal:</strong></p>
+                                    <p class="text-muted"><?= $direction['POSTAL_CODE'] ?></p>
+                                </div>
+                                <div class="col-12">
+                                    <p class="mb-1"><strong>Dirección Completa:</strong></p>
+                                    <p class="text-muted"><?= $direction['DIRECTION'] ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Información de Pago -->
+                <div class="col-md-6">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title border-bottom pb-2">
+                                <i class="fas fa-credit-card me-2"></i>Información de Pago
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <p class="mb-1"><strong>Entidad Bancaria:</strong></p>
+                                    <p class="text-muted"><?= $pay['BANKING_ENTITY_NAME'] ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="mb-1"><strong>Número de Referencia:</strong></p>
+                                    <p class="text-muted"><?= $pay['NUMBER_ELECTION'] ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalle de Productos -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Detalle de Productos</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center">Vendedor</th>
+                                    <th class="text-center">Producto</th>
+                                    <th class="text-center">Contenido</th>
+                                    <th class="text-center">Unidades</th>
+                                    <th class="text-end">Precio Unit.</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($list as $listCar) : ?>
+                                <tr>
+                                    <td class="text-center"><?= $listCar['NAME_SELLER'] ?> <?= $listCar['SURNAME'] ?></td>
+                                    <td class="text-center"><?= $listCar['NAME_PRODUCT'] ?></td>
+                                    <td class="text-center"><?= $listCar['CONTENT'] ?></td>
+                                    <td class="text-center"><?= $listCar['AMOUNT'] ?></td>
+                                    <td class="text-end"><?='$'.number_format($listCar['PRICE'], 0, ',') ?></td>
+                                    <td class="text-end"><?='$'.number_format($listCar['PRICE'] * $listCar['AMOUNT'], 0, ',') ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen de Totales -->
+            <div class="row justify-content-end">
+                <div class="col-md-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Subtotal:</span>
+                                <strong><?='$'.number_format($total, 0, ',') ?></strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 text-danger">
+                                <span>Descuento:</span>
+                                <strong><?='$'.number_format($descuento, 0, ',') ?></strong>
+                            </div>
+                            <div class="d-flex justify-content-between border-top pt-3">
+                                <h5 class="mb-0">Total a Pagar:</h5>
+                                <h5 class="mb-0 text-success"><?='$'.number_format(($total - $descuento), 0, ',') ?></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de Compra -->
+            <div class="text-center mt-4">
+                <form id="purchaseForm" action="<?= init ?><?= transaction ?><?= purchase ?>" method="post">
+                    <input type="hidden" name="id_direction" value="<?= $idDirection ?>">
+                    <input type="hidden" name="id_pay" value="<?= $idPay ?>">
+                    <input type="hidden" name="total" value="<?= ($total - $descuento)?>">
+                    <input type="hidden" name="descuento" value="<?= $descuento?>">
+                    <button type="button" class="btn btn-primary btn-lg px-5" id="openModalBtn">
+                        <i class="fas fa-shopping-cart me-2"></i>Confirmar Compra
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-    <!-- Datos del envío -->
-    <h3 class="mb-3">Datos del Envío</h3>
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <p><strong>Carrera:</strong>
-                <?= $direction['CARRER'] ?>
-            </p>
+
+    <!-- Términos y Condiciones -->
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <small class="text-muted">
+                <p class="mb-1">Términos y Condiciones:</p>
+                <ul class="mb-0">
+                    <li>Los precios incluyen IVA</li>
+                    <li>Garantía válida por 30 días después de la compra</li>
+                    <li>Para devoluciones consulte nuestra política de retornos</li>
+                </ul>
+            </small>
         </div>
-        <div class="col-md-4">
-            <p><strong>Calle:</strong>
-                <?= $direction['STREET'] ?>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Código Postal:</strong>
-                <?= $direction['POSTAL_CODE'] ?>
-            </p>
-        </div>
-        <div class="col-md-12">
-            <p><strong>Dirección:</strong>
-                <?= $direction['DIRECTION'] ?>
-            </p>
-        </div>
-    </div>
-    <!-- Datos del pago -->
-    <h3 class="mb-3">Datos del Pago</h3>
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <p><strong>Entidad Bancaria:</strong>
-                <?= $pay['BANKING_ENTITY_NAME'] ?>
-            </p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Número:</strong>
-                <?= $pay['NUMBER_ELECTION'] ?>
-            </p>
-        </div>
-    </div>
-    <!-- Datos del producto -->
-    <h3 class="mb-3">Datos del Producto</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Vendedor</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Contenido</th>
-                <th>Unidades</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($list as $listCar) : ?>
-            <tr>
-                <td>
-                    <?= $listCar['NAME_SELLER'] ?>
-                    <?= $listCar['SURNAME'] ?>
-                </td>
-                <td>
-                    <?= $listCar['NAME_PRODUCT'] ?>
-                </td>
-                <td>
-                    <?='$'.number_format($listCar['PRICE'], 0, ','); ?>
-                </td>
-                <td>
-                    <?= $listCar['CONTENT'] ?>
-                </td>
-                <td>
-                    <?= $listCar['AMOUNT'] ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <!-- Total -->
-    <br>
-    <h3 class="text-end mt-4">Subtotal:
-        <?='$'.number_format($total, 0, ','); ?>
-    </h3>
-    <h3 class="text-end mt-4 text-danger">Descuento:
-        <?='$'.number_format($descuento, 0, ','); ?>
-    </h3>
-    <h3 class="text-end mt-4 text-success">Total:
-        <?='$'.number_format(($total - $descuento), 0, ','); ?>
-    </h3>
-    </h3>
-    <br>
-    <div class="text-center">
-        <form id="purchaseForm" action="<?= init ?><?= transaction ?><?= purchase ?>" method="post">
-            <input type="hidden" name="id_direction" value="<?= $idDirection ?>">
-            <input type="hidden" name="id_pay" value="<?= $idPay ?>">
-            <input type="hidden" name="total" value="<?= ($total - $descuento)?>">
-            <input type="hidden" name="descuento" value="<?= $descuento?>">
-            <button type="button" class="btn btn-primary" id="openModalBtn">Realizar compra</button>
-        </form>
-        <br>
-        <br>
     </div>
 </div>
-<!-- Modal -->
+
+<!-- Modal de Confirmación -->
 <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="infoModalLabel">Compra Exitosa</h5>
-                <!-- Elimina el botón de cierre -->
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="infoModalLabel">
+                    <i class="fas fa-check-circle me-2"></i>Compra Exitosa
+                </h5>
             </div>
-            <div class="modal-body">
-                <?php echo "La compra se ha realizado exitosamente"; ?>
+            <div class="modal-body text-center py-4">
+                <i class="fas fa-shopping-cart fa-3x text-success mb-3"></i>
+                <p class="mb-0">La compra se ha realizado exitosamente</p>
             </div>
-            <div class="modal-footer">
-                <!-- Único botón para confirmar y enviar el formulario -->
-                <button type="button" class="btn btn-primary" id="confirmPurchase">Confirmar</button>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-success px-4" id="confirmPurchase">
+                    <i class="fas fa-check me-2"></i>Confirmar
+                </button>
             </div>
         </div>
     </div>

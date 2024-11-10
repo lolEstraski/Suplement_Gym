@@ -1,58 +1,36 @@
-<div class="col-12 p-5 m-1 row">
-    <h2 class="text-center">Actualizar</h2>
-    <br>
-    <br>
-    <br>
-    <form action="<?=init?><?=direction?><?=updatePay?>&id=<?=$pay['PAY_ID']?>" method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-7">
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Entidad Bancaria
-                            </span>
-                        </div>
-                        <select name="bankingEntity" name="bankingEntity" class="form-control" required>
-                            <?php foreach($listBankEntity as $bankingEntity) : ?>
-                                <option value="<?=$bankingEntity['BANKING_ENTITY_ID']?>"
-                                    <?=($pay['BANKING_ENTITY_NAME'] == $bankingEntity['NAME']) ? 'selected' : '' ?>>
-                                    <?=$bankingEntity['NAME']?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>     
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Numero
-                            </span>
-                        </div>
-                        <input type="number" name="number_election" value="<?=$pay['NUMBER_ELECTION']?>" class="form-control" required>
-                    </div>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h2>Actualizar</h2>
                 </div>
-                <br>
-                <br>
-                <div class="col-12 row">
-                    <div class="col-6">
+                <div class="card-body">
+                    <form action="<?=init?><?=direction?><?=updatePay?>&id=<?=$pay['PAY_ID']?>" method="post" enctype="multipart/form-data">
+                        <div class="form-group mb-3">
+                            <label for="bankingEntity" class="form-label">Entidad Bancaria</label>
+                            <select name="bankingEntity" id="bankingEntity" class="form-control" required>
+                                <?php foreach($listBankEntity as $bankingEntity) : ?>
+                                    <option value="<?=$bankingEntity['BANKING_ENTITY_ID']?>"
+                                        <?=($pay['BANKING_ENTITY_NAME'] == $bankingEntity['NAME']) ? 'selected' : '' ?>>
+                                        <?=$bankingEntity['NAME']?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="number_election" class="form-label">Numero</label>
+                            <input type="number" name="number_election" id="number_election" value="<?=$pay['NUMBER_ELECTION']?>" class="form-control" required>
+                        </div>
                         <div class="d-flex justify-content-center">
                             <input type="submit" class="btn btn-success" value="Actualizar Datos">
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="col-3"></div>
-                <img id="imgRegister" class="img-fluid"
-                    src="assets/images/logos/pago.png" alt="">
-                <br>
-            </div>
         </div>
-    </form>
+        <div class="col-md-4 d-flex align-items-center">
+            <img id="imgRegister" class="img-fluid" src="assets/images/logos/pagos.png" alt="">
+        </div>
+    </div>
 </div>

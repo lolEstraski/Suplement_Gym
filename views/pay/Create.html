@@ -11,32 +11,36 @@
 <?php endif; ?>
 <?php helps::deleteSession('errorregistro'); ?>
 
-<div class="col-12 p-5 m-1 row">
-    <div class="col-7 me-4">
-        <h2 class="text-center">Formulario de registro</h2>
-        <br>
-        <br>
-        <form action="<?=init?><?=pay?><?=registerPay?>" method="post">
-            <div class="form-group">
-                <label for="entity">Entidad Bancaria</label>
-                <select name="entity" name="entity" class="form-control" required>
-                    <?php foreach($listBankEntities as $banksEntities) : ?>
-                        <option value="<?=$banksEntities['BANKING_ENTITY_ID']?>"><?=$banksEntities['NAME']?></option>
-                    <?php endforeach; ?>
-                </select>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h2>Formulario de registro</h2>
+                </div>
+                <div class="card-body">
+                    <form action="<?=init?><?=pay?><?=registerPay?>" method="post">
+                        <div class="form-group mb-3">
+                            <label for="entity" class="form-label">Entidad Bancaria</label>
+                            <select name="entity" id="entity" class="form-control" required>
+                                <?php foreach($listBankEntities as $banksEntities) : ?>
+                                    <option value="<?=$banksEntities['BANKING_ENTITY_ID']?>"><?=$banksEntities['NAME']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="electionNumber" class="form-label">Numero De La Eleccion</label>
+                            <input type="number" name="electionNumber" id="electionNumber" class="form-control" required>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="btn btn-success" value="Crear">
+                        </div>
+                    </form>
+                </div>
             </div>
-            <br>
-            <div class="form-group">
-                <label for="electionNumber">Numero De La Eleccion</label>
-                <input type="number" name="electionNumber" class="form-control" required>
-            </div>
-            <br>
-            <div class="d-flex justify-content-center">
-                <input type="submit" class="btn btn-success" value="Crear">
-            </div>
-        </form>
-    </div>
-    <div class="col-3">
-        <img id="payImage" class="d-block" src="assets/images/logos/pago.png" alt="">
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <img id="payImage" class="img-fluid" src="assets/images/logos/pagos.png" alt="">
+        </div>
     </div>
 </div>
