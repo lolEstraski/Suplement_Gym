@@ -1,0 +1,150 @@
+<?php $information = Helps::showUserInformation(); ?>
+<?php if(isset($_SESSION['erroreliminar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroreliminar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroreliminar'); ?>
+<?php if(isset($_SESSION['aciertoactualizar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoactualizar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoactualizar'); ?>
+<?php if(isset($_SESSION['erroractualizar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroractualizar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroractualizar'); ?>
+<div class="col-12 p-5 m-1 row">
+    <h2 class="text-center">Mi Perfil</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form action="<?=init?><?=user?><?=updateUser?>" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-7">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text rounded-0">Código</span>
+                                </div>
+                                <input type="text" name="name" value="<?=$information['CODE']?>" class="form-control"
+                                    disabled>
+                            </div>
+                        </div>
+                        <div class="col-2 d-flex align-items-center justify-content-center">
+                            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left"
+                                title="Este es el codigo con el cual podras formar parte del negocio">
+                                &#8505;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Nombre
+                            </span>
+                        </div>
+                        <input type="text" name="name" value="<?=$information['NAME']?>" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Apellidos
+                            </span>
+                        </div>
+                        <input type="text" name="surname" value="<?=$information['SURNAME']?>" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Telefono
+                            </span>
+                        </div>
+                        <input type="text" name="phone" value="<?=$information['PHONE']?>" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Correo
+                            </span>
+                        </div>
+                        <input type="text" name="email" value="<?=$information['EMAIL']?>" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="col-12 row">
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="btn btn-success" value="Actualizar Datos">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" type="submit"
+                                class="btn btn-danger" data-id="<?=$_SESSION['loginsucces']['USER_ID']?>">Eliminar
+                                Cuenta</a>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <a href="<?=init?><?=user?><?=windowChangePassword?>" type="submit"
+                                class="btn btn-primary">Cambiar clave</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-3"></div>
+                <img id="imgRegister" class="img-fluid rounded-circle"
+                    src="resources/imagesUsers/<?=$information['IMAGE']?>" alt="">
+                <br>
+                <label for="formFile" class="form-label">Actualizar foto de perfil</label>
+                <input class="form-control" id="formFile" type="file" name="image" accept="image/*">
+            </div>
+        </div>
+    </form>
+</div>

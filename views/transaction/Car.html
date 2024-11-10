@@ -1,0 +1,148 @@
+<?php if(isset($_SESSION['aciertocarrito'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['aciertocarrito']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertocarrito'); ?>
+<?php if(isset($_SESSION['errorwindow'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['errorwindow']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('errorwindow'); ?>
+<?php if(isset($_SESSION['errordecremento'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['errordecremento']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('errordecremento'); ?>
+<?php if(isset($_SESSION['errordecremento'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['errordecremento']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('errordecremento'); ?>
+<?php if(isset($_SESSION['errorincremento'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['errorincremento']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('errorincremento'); ?>
+<?php if(isset($_SESSION['aciertoeliminar'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['aciertoeliminar']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoeliminar'); ?>
+<?php if(isset($_SESSION['erroreliminar'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['erroreliminar']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('erroreliminar'); ?>
+<div class="container my-5 p-5">
+    <?php if(sizeof($list) == 0) : ?>
+        <h1 class="text-center mt-5 mb-5">No hay productos agregados</h1>
+    <?php else : ?>
+        <br>
+        <div class="text-center">
+            <h2>Carrito de Compras</h2>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <?php foreach($list as $listCar) : ?>
+                <div class="col-md-12 mb-3">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-2">
+                                <img src="resources/imagesProducts/<?=$listCar['IMAGE']?>" class="card-img" alt="Producto 1">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?=$listCar['NAME']?></h5>
+                                    <p class="card-text"><?=$listCar['PRICE']?></p>
+                                    <div class="d-flex align-items-center">
+                                        <?php if($listCar['AMOUNT'] > 0) : ?>
+                                            <a href="<?=init?><?=transaction?><?=decreaseQuantity?>&id=<?=$listCar['PRODUCT_ID']?>" class="btn btn-outline-secondary btn-sm mr-2">-</a>
+                                        <?php endif;?>
+                                        <input type="text" class="form-control text-center" value="<?=$listCar['AMOUNT']?>" style="width: 50px;" readonly>
+                                        <?php if($listCar['AMOUNT'] < $listCar['STOCK']) : ?>
+                                            <a href="<?=init?><?=transaction?><?=increaseQuantity?>&id=<?=$listCar['PRODUCT_ID']?>" class="btn btn-outline-secondary btn-sm ml-2">+</a>
+                                        <?php endif;?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                <h5 class="mb-0"><?=$listCar['AMOUNT'] * $listCar['PRICE']?></h5>
+                            </div>
+                            <!-- Botón de eliminar -->
+                            <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                <a href="<?=init?><?=transaction?><?=deleteProductCar?>&id=<?=$listCar['PRODUCT_ID']?>" class="btn btn-danger btn-sm">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php 
+                    $units = $listCar['AMOUNT'];
+                    $prices = $listCar['PRICE'];
+                    $total += ($units * $prices);
+                ?>
+            <?php endforeach; ?>
+            <div class="col-md-12 mt-4">
+                <div class="d-flex justify-content-end">
+                    <h4>Subtotal: <?=$total?></h4>
+                    <br>
+                </div>
+            </div>
+            <div class="col-md-12 mt-4">
+                <div class="d-flex justify-content-between">
+                    <a href="<?=init?><?=transaction?><?=deleteCar?>" class="btn btn-danger">Eliminar todo el carrito</a>
+                    <a href="<?=init?><?=transaction?><?=windowPurchase?>&total=<?=$total?>" class="btn btn-primary">Continuar</a>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>    
+</div>

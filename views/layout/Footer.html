@@ -1,0 +1,284 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fs-5" id="exampleModalLabel3">Eliminar Cuenta</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estas seguro que deseas eliminar tu cuenta?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    No
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteUser">
+                    Sí, eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal13" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fs-5" id="exampleModalLabel3">Eliminar Cuenta</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estas seguro que deseas eliminar la cuenta de este usuario?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    No
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteUserA">
+                    Sí, eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fs-5" id="exampleModalLabel3">Recuperar Cuenta</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estas seguro que deseas recuperar la cuenta?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    No
+                </button>
+                <button type="button" class="btn btn-secondary" id="confirmRecoveryUser">
+                    Sí, recuperar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer" class="col-lg-12 h-25 text-white">
+    <p>Eduardo Cortes Pineda, Ingeniería De Sistemas Y Computación 2024 - 2 &copy;</p>
+</footer>
+</div>
+</div>
+<!--Cargar JS de BOOTSTRAP-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        /*Inicializar los tooltips*/
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
+    $(document).ready(function () {
+        $(".carousel").carousel({
+            interval: 3500
+        })
+    })
+    document.addEventListener('DOMContentLoaded', function () {
+        const confirmLogoutButton = document.getElementById('confirmLogout');
+        if (confirmLogoutButton) {
+            confirmLogoutButton.addEventListener('click', function () {
+                const url = "<?=init?><?=user?><?=logoutUser?>";
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteDirectionButton = document.getElementById('confirmDeleteDirection');
+        const exampleModal5 = document.getElementById('exampleModal5');
+        let directionId;
+        if (exampleModal5) {
+            exampleModal5.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                directionId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteDirectionButton) {
+            confirmDeleteDirectionButton.addEventListener('click', function () {
+                const url = `<?=init?><?=direction?><?=deleteDirection?>&id=${directionId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeletePayButton = document.getElementById('confirmDeletePay');
+        const exampleModal4 = document.getElementById('exampleModal4');
+        let payId;
+        if (exampleModal4) {
+            exampleModal4.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                payId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeletePayButton) {
+            confirmDeletePayButton.addEventListener('click', function () {
+                const url = `<?=init?><?=pay?><?=deletePay?>&id=${payId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteProductButton = document.getElementById('confirmDeleteProduct');
+        const exampleModal2 = document.getElementById('exampleModal2');
+        let productId;
+        if (exampleModal2) {
+            exampleModal2.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                productId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteProductButton) {
+            confirmDeleteProductButton.addEventListener('click', function () {
+                const url = `<?=init?><?=product?><?=deleteProduct?>&id=${productId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteUserButton = document.getElementById('confirmDeleteUser');
+        const exampleModal3 = document.getElementById('exampleModal3');
+        let userId;
+        if (exampleModal3) {
+            exampleModal3.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                userId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteUserButton) {
+            confirmDeleteUserButton.addEventListener('click', function () {
+                const url = `<?=init?><?=user?><?=deleteUser?>&id=${userId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteDepartmentButton = document.getElementById('confirmDeleteDepartment');
+        const exampleModal6 = document.getElementById('exampleModal6');
+        let departmentId;
+        if (exampleModal6) {
+            exampleModal6.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                departmentId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteDepartmentButton) {
+            confirmDeleteDepartmentButton.addEventListener('click', function () {
+                const url = `<?=init?><?=department?><?=deleteDepartment?>&id=${departmentId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteBankingEntityButton = document.getElementById('confirmDeleteBankEntity');
+        const exampleModal7 = document.getElementById('exampleModal7');
+        let bankingEntityId;
+        if (exampleModal7) {
+            exampleModal7.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                bankingEntityId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteBankingEntityButton) {
+            confirmDeleteBankingEntityButton.addEventListener('click', function () {
+                const url = `<?=init?><?=bankEntity?><?=deleteBankEntity?>&id=${bankingEntityId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteGenreButton = document.getElementById('confirmDeleteGenre');
+        const exampleModal8 = document.getElementById('exampleModal8');
+        let genreId;
+        if (exampleModal8) {
+            exampleModal8.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                genreId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteGenreButton) {
+            confirmDeleteGenreButton.addEventListener('click', function () {
+                const url = `<?=init?><?=genre?><?=deleteGenre?>&id=${genreId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteNewsButton = document.getElementById('confirmDeleteNews');
+        const exampleModal9 = document.getElementById('exampleModal9');
+        let newsId;
+        if (exampleModal9) {
+            exampleModal9.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                newsId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteNewsButton) {
+            confirmDeleteNewsButton.addEventListener('click', function () {
+                const url = `<?=init?><?=news?><?=deleteNews?>&id=${newsId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeletePurchasingStatusButton = document.getElementById('confirmDeletePurchasingStatue');
+        const exampleModal10 = document.getElementById('exampleModal10');
+        let purchasingStatusId;
+        if (exampleModal10) {
+            exampleModal10.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                purchasingStatusId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeletePurchasingStatusButton) {
+            confirmDeletePurchasingStatusButton.addEventListener('click', function () {
+                const url = `<?=init?><?=purchasingStatus?><?=deletePurchasingStatus?>&id=${purchasingStatusId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteProductAButton = document.getElementById('confirmDeleteProductA');
+        const exampleModal11 = document.getElementById('exampleModal11');
+        let productIdA;
+        if (exampleModal11) {
+            exampleModal11.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                productId = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteProductAButton) {
+            confirmDeleteProductAButton.addEventListener('click', function () {
+                const url = `<?=init?><?=administrator?><?=deleteProductA?>&id=${productId}`;
+                window.location.href = url;
+            });
+        }
+        const confirmRecoveryUserButton = document.getElementById('confirmRecoveryUser');
+        const exampleModal12 = document.getElementById('exampleModal12');
+        let userIdR;
+        if (exampleModal12) {
+            exampleModal12.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                userIdR = button.getAttribute('data-id');
+            });
+        }
+        if (confirmRecoveryUserButton) {
+            confirmRecoveryUserButton.addEventListener('click', function () {
+                const url = `<?=init?><?=administrator?><?=recoveryUser?>&id=${userIdR}`;
+                window.location.href = url;
+            });
+        }
+        const confirmDeleteUserAButton = document.getElementById('confirmDeleteUserA');
+        const exampleModal13 = document.getElementById('exampleModal13');
+        let userIdA;
+        if (exampleModal13) {
+            exampleModal13.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                userIdA = button.getAttribute('data-id');
+            });
+        }
+        if (confirmDeleteUserAButton) {
+            confirmDeleteUserAButton.addEventListener('click', function () {
+                const url = `<?=init?><?=administrator?><?=deleteUserA?>&id=${userIdA}`;
+                window.location.href = url;
+            });
+        }
+        /*Mostrar el modal al hacer clic en el botón*/
+        document.getElementById('openModalBtn').addEventListener('click', function () {
+            var myModal = new bootstrap.Modal(document.getElementById('infoModal'));
+            myModal.show();
+        });
+        /*Enviar el formulario cuando se confirme la compra*/
+        document.getElementById('confirmPurchase').addEventListener('click', function () {
+            document.getElementById('purchaseForm').submit();
+        });
+        $(".btn-tool").tooltip()
+    });
+</script>
+</body>
+</html>

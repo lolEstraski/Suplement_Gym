@@ -1,0 +1,29 @@
+<div class="m-5">
+    <h1 class="text-center mt-5 mb-5">Todas las noticias</h1>
+    <!-- Noticias -->
+    <div class="row g-4"> <!-- g-4 añade un espaciado uniforme entre las tarjetas -->
+        <?php foreach($listNews as $list) : ?>
+        <div class="col-md-5"> <!-- Cambiado a col-md-5 para aumentar el ancho de las tarjetas -->
+            <div class="p-4 bg-light rounded-3 h-100">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="resources/imagesNews/<?=$list['IMAGE']?>" class="img-fluid rounded"
+                            alt="Imagen de la noticia">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="container-fluid py-3">
+                            <h2 class="fw-bold">
+                                <?=$list['TITLE']?>
+                            </h2>
+                            <p class="fs-5">
+                                <?=$list['CONTENT']?>
+                            </p>
+                            <a href="<?=$list['LINK']?>" target="_blank" class="btn btn-primary">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>

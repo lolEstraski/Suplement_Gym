@@ -1,0 +1,47 @@
+<div class="col-12 m-5">
+    <?php if(sizeof($list) == 0) : ?>
+    <h1 class="text-center mt-5 mb-5">No haz realizado ninguna compra</h1>
+    <?php else : ?>
+    <h2 class="text-center">Mis compras</h2>
+    <div class="col-10 m-5">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        <div class="text-center">
+                            Factura
+                        </div>
+                    </th>
+                    <th>
+                        <div class="text-center">
+                            Fecha
+                        </div>
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <?php foreach($list as $listTransactions) : ?>
+            <tr>
+                <td>
+                    <div class="text-center">
+                        <?=$listTransactions['NUMBER_BILL']?>
+                    </div>
+                </td>
+                <td>
+                    <div class="text-center">
+                        <?=$listTransactions['DATE_TIME']?>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a href="<?=init?><?=transaction?><?=detailShop?>&id=<?=$listTransactions['TRANSACTION_ID']?>"
+                            class="btn btn-primary">Ver detalle</a>
+                    </div>
+                </td>
+            </tr>
+            <?php endforeach?>
+        </table>
+    </div>
+    <?php endif; ?>
+</div>

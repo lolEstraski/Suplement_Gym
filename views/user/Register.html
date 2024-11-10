@@ -1,0 +1,93 @@
+<?php if(isset($_SESSION['erroregistro'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroregistro']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroregistro'); ?>
+<div class="col-12 p-5 m-1 row">
+    <h2 class="text-center">Formulario de registro</h2>
+    <br>
+    <br>
+    <form action="<?=init?><?=user?><?=registerUser?>" method="post" enctype="multipart/form-data">
+        <div class="col-12 row">
+            <div class="col-6 me-5">
+                <div class="form-group">
+                    <label for="nameu">Nombre</label>
+                    <input type="text" name="nameu" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="surname">Apellidos</label>
+                    <input type="text" name="surname" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="birthdate">Fecha de nacimiento</label>
+                    <input type="date" name="birthdate" class="form-control" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="genre">Genero</label>
+                    <select name="genre" name="genre" class="form-control" required>
+                        <?php foreach($listGenres as $genres) : ?>
+                        <option value="<?=$genres['GENRE_ID']?>">
+                            <?=$genres['NAME']?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="number" name="phone" class="form-control" required>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-10">
+                        <div class="form-group">
+                            <label for="email">Correo</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-center">
+                        <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left"
+                            title="El correo debe ser unico">
+                            &#8505;
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-10">
+                        <div class="form-group">
+                            <label for="password">Clave</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-center">
+                        <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left"
+                            title="La clave debe contener una letra mayuscula, minuscula, numero, caracter especial y minimo 6 caracteres">
+                            &#8505;
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <img id="imgRegister" class="d-block" src="assets/images/logos/user.png" alt="">
+                <br>
+                <label for="formFile" class="form-label">Subir foto de perfil</label>
+                <input class="form-control" id="formFile" type="file" name="image" accept="image/*" required>
+            </div>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-success" value="Registrar">
+        </div>
+    </form>
+</div>

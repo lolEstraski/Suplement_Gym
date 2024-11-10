@@ -1,0 +1,79 @@
+<?php if(isset($_SESSION['aciertoiniciarsesion'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoiniciarsesion']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoiniciarsesion'); ?>
+<div class="container my-5 p-4 bg-light rounded shadow">
+    <div class="text-center">
+        <h1>Gestiones</h1>
+        <br>
+        <p class="lead text-secondary">Administra y organiza las diferentes secciones del sistema</p>
+    </div>
+    <ul id="gestionesAdmin" class="list-group mt-4">
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowManagementUsers?>" class="text-decoration-none text-dark">
+                <i class="bi bi-people-fill me-2 text-primary"></i> Gestión de usuarios
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowManagementGenres?>" class="text-decoration-none text-dark">
+                <i class="bi bi-music-note-list me-2 text-success"></i> Gestión de géneros
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowManagementDepartments?>"
+                class="text-decoration-none text-dark">
+                <i class="bi bi-building me-2 text-info"></i> Gestión de departamentos
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowManagementPurchasingStatus?>"
+                class="text-decoration-none text-dark">
+                <i class="bi bi-cart-check me-2 text-warning"></i> Gestión de estados de compra
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowManagementBankEntities?>"
+                class="text-decoration-none text-dark">
+                <i class="bi bi-bank me-2 text-danger"></i> Gestión de entidades bancarias
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowManagementNews?>" class="text-decoration-none text-dark">
+                <i class="bi bi-newspaper me-2 text-primary"></i> Gestión de noticias
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowManagementProducts?>" class="text-decoration-none text-dark">
+                <i class="bi bi-box-seam me-2 text-success"></i> Gestión de productos
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowAddUserAdmin?>" class="text-decoration-none text-dark">
+                <i class="bi bi-person-plus me-2 text-info"></i> Asignar Fundadores
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=windowReports?>" class="text-decoration-none text-dark">
+                <i class="bi bi-graph-up me-2 text-warning"></i> Reportes
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=pyramid?>" class="text-decoration-none text-dark">
+                <i class="bi bi-diagram-3 me-2 text-danger"></i> Pirámide
+            </a>
+        </li>
+        <li class="list-group-item mb-3 fs-5 text-center">
+            <a href="<?=init?><?=administrator?><?=sales?>" class="text-decoration-none text-dark">
+                <i class="bi bi-diagram-3 me-2 text-danger"></i> Gestion de ventas
+            </a>
+        </li>
+    </ul>
+</div>

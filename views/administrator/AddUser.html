@@ -1,0 +1,51 @@
+<?php if(isset($_SESSION['errorasignacion'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['errorasignacion']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('errorasignacion'); ?>
+<?php if(isset($_SESSION['aciertoasignacion'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoasignacion']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoasignacion'); ?>
+<div class="col-12 p-5 m-1 row">
+    <div class="col-7 me-4">
+        <h2 class="text-center">Agregar Usuario Fundador</h2>
+        <br>
+        <br>
+        <form action="<?=init?><?=administrator?><?=addUserAdmin?>" method="post">
+            <div>
+                <h2>Aspectos a tener en cuenta</h1>
+                    <p class="justify-content-between">Ingresa el codigo del usuario fundador que deseas unir al
+                        negocio, este será
+                        el primer nivel, comprará los productos direcamente a la tienda, y podrá referir usuarios</p>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="code">Codigo Del Usuario A Referir</label>
+                <input type="text" name="code" class="form-control" required>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <input type="submit" class="btn btn-success" value="Referir">
+            </div>
+        </form>
+    </div>
+    <div class="col-3">
+        <img id="imgNetwork" class="d-block" src="assets/images/logos/agregar-usuario.png" alt="">
+    </div>
+</div>

@@ -1,0 +1,144 @@
+<div style="margin-top: 40px; margin-bottom: 40px;">
+    <img src="assets/images/logos/logotienda.png" style="width: 100px; height: 100px; margin-left: 315px;">
+    <br>
+    <br>
+    <h2 style="text-align: center;">Eduard Energy Drinks</h2>
+    <br>
+    <br>
+    <h4 style="text-align: center;">"Despierta el poder dentro de ti, recarga cada instante y alcanza el máximo
+        rendimiento con la energía que te impulsa a lograr lo imposible."</h4>
+    <br>
+    <br>
+    <p style="text-align: center;">Factura generada:
+        <?=Helps::today();?>
+    </p>
+    <br>
+    <br>
+    <h2 style="text-align: center; margin-bottom: 20px; font-weight: bold;">Detalle Compra</h2>
+    <br>
+    <!-- Datos del vendedor -->
+    <h4 style="margin-bottom: 20px;">Datos del Vendedor</h4>
+    <div style="width: 80%; margin: 0 auto; margin-bottom: 20px;">
+        <?php if($detail[0]['USER_NAME'] == NULL) : ?>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 30%;"><strong>Nombre:</strong>Tienda</div>
+        </div>
+        <?php else : ?>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 30%;"><strong>Nombre:</strong>
+                <?= $detail[0]['USER_NAME'] ?>
+            </div>
+            <div style="width: 30%;"><strong>Apellidos:</strong>
+                <?= $detail[0]['SURNAME'] ?>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+            <div style="width: 30%;"><strong>Correo:</strong>
+                <?= $detail[0]['EMAIL'] ?>
+            </div>
+            <div style="width: 30%;"><strong>Telefono:</strong>
+                <?= $detail[0]['PHONE'] ?>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+    <br>
+    <br>
+    <!-- Datos del envío -->
+    <h4 style="margin-bottom: 20px;">Datos del Envío</h4>
+    <div style="width: 80%; margin: 0 auto; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 30%;"><strong>Ciudad:</strong>
+                <?= $detail[0]['CITY'] ?>
+            </div>
+            <div style="width: 30%;"><strong>Carrera:</strong>
+                <?= $detail[0]['CARRER'] ?>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+            <div style="width: 30%;"><strong>Calle:</strong>
+                <?= $detail[0]['STREET'] ?>
+            </div>
+            <div style="width: 30%;"><strong>Código Postal:</strong>
+                <?= $detail[0]['POSTAL_CODE'] ?>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!-- Datos del estado del envio -->
+    <h4 style="margin-bottom: 20px;">Estado del Estado</h4>
+    <div style="margin-left: 125px;"><strong>
+            <?= $detail[0]['NAME_PURCHASING_STATUS'] ?>
+        </strong></div>
+    <br>
+    <br>
+    <!-- Datos del pago -->
+    <h4 style="margin-bottom: 20px;">Datos del Pago</h4>
+    <div style="width: 80%; margin: 0 auto; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 50%;"><strong>Entidad Bancaria:</strong>
+                <?= $detail[0]['BANK_ENTITY_NAME'] ?>
+            </div>
+            <div style="width: 50%;"><strong>Número de elección:</strong>
+                <?= $detail[0]['NUMBER_ELECTION'] ?>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Datos del producto -->
+    <h4 style="margin-bottom: 20px;">Datos del Producto</h4>
+    <br>
+    <div style="width: 100%; margin: 0 auto;">
+        <table style="width: 90%; border-collapse: collapse; margin: 0 auto; text-align: left;">
+            <thead style="color: black; background-color: rgb(235, 241, 241); font-size: 19px;">
+                <tr>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Producto</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Precio</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Contenido</th>
+                    <th style="padding: 8px; border: 1px solid #ddd;">Unidades</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($detail as $listCar) : ?>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <?= $listCar['PRODUCT_NAME'] ?>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <?='$'.number_format($listCar['PRICE'], 0, ','); ?>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <?= $listCar['CONTENT'] ?>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <?= $listCar['UNITS'] ?>
+                    </td>
+                </tr>
+                <?php $total += ($listCar['PRICE'] * $listCar['UNITS'])?>
+                <?php endforeach; ?>
+                <?php $discount = $listCar['DISCOUNT']?>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="<?=init?><?=transaction?><?=generatePdf2?>&id=<?=$listCar['TRANSACTION_ID']?>"
+            style="display: inline-block; padding: 6px 13px; background-color: #007bff; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">Generar
+            PDF</a>
+    </div>
+    <br>
+    <!-- Total -->
+    <div style="text-align: right; margin-top: 20px;">
+        <h3>Subtotal:
+            <?='$'.number_format($total, 0, ','); ?>
+        </h3>
+        <h3 class="text-danger">Descuento:
+            <?='$'.number_format($discount, 0, ','); ?>
+        </h3>
+        <h3 class="text-success">Total:
+            <?='$'.number_format(($total - $discount), 0, ','); ?>
+        </h3>
+    </div>
+    <br>
+</div>

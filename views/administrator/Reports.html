@@ -1,0 +1,93 @@
+<?php if(isset($_SESSION['errorventana'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['errorventana']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('errorventana'); ?>
+<div class="container my-5 p-4 bg-light rounded shadow">
+    <div class="text-center">
+        <h1>Reportes</h1>
+        <br>
+        <p class="lead text-secondary">Explora los diferentes reportes disponibles en el sistema</p>
+    </div>
+    <ul id="gestionesAdmin" class="list-group mt-4">
+        <li class="list-group-item mb-3 fs-5 d-flex justify-content-between align-items-center">
+            <a href="<?=init?><?=reports?><?=urpu?>" class="text-decoration-none text-dark">
+                <i class="bi bi-people-fill me-2 text-primary"></i> Usuarios Referidos por Usuario
+            </a>
+            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left" title="Muestra la cantidad de usuarios referidos
+                por cada usuario.">
+                &#8505;
+            </button>
+        </li>
+        <li class="list-group-item mb-3 fs-5 d-flex justify-content-between align-items-center">
+            <a href="<?=init?><?=reports?><?=gpu?>" class="text-decoration-none text-dark">
+                <i class="bi bi-cash-stack me-2 text-success"></i> Ganancias por Usuario (Total Acumulado)
+            </a>
+            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left" title="Muestra las ganancias totales
+                acumuladas por cada usuario.">
+                &#8505;
+            </button>
+        </li>
+        <li class="list-group-item mb-3 fs-5 d-flex justify-content-between align-items-center">
+            <a href="<?=init?><?=reports?><?=vr?>" class="text-decoration-none text-dark">
+                <i class="bi bi-cart-check me-2 text-info"></i> Ventas Realizadas (Por Usuario y Fecha)
+            </a>
+            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left" title="Muestra las ventas realizadas por
+                cada usuario en un rango de fechas específico.">
+                &#8505;
+            </button>
+        </li>
+        <li class="list-group-item mb-3 fs-5 d-flex justify-content-between align-items-center">
+            <a href="<?=init?><?=reports?><?=upn?>" class="text-decoration-none text-dark">
+                <i class="bi bi-diagram-3 me-2 text-warning"></i> Usuarios por Nivel
+            </a>
+            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left" title="Muestra el número de usuarios que pertenecen a cada
+                nivel de la estructura piramidal.">
+                &#8505;
+            </button>
+        </li>
+        <li class="list-group-item mb-3 fs-5 d-flex justify-content-between align-items-center">
+            <a href="<?=init?><?=reports?><?=cpu?>" class="text-decoration-none text-dark">
+                <i class="bi bi-bag-check me-2 text-danger"></i> Compras por Usuario (Últimos 30 días)
+            </a>
+            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left" title="Muestra las compras realizadas por
+                cada usuario en los últimos 30 días.">
+                &#8505;
+            </button>
+        </li>
+        <li class="list-group-item mb-3 fs-5 d-flex justify-content-between align-items-center">
+            <a href="<?=init?><?=reports?><?=cgpu?>" class="text-decoration-none text-dark">
+                <i class="bi bi-wallet2 me-2 text-primary"></i> Comisiones Ganadas por Usuario
+            </a>
+            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left" title="Muestra el total de comisiones ganadas
+                por cada usuario.">
+                &#8505;
+            </button>
+        </li>
+        <li class="list-group-item mb-3 fs-5 d-flex justify-content-between align-items-center">
+            <a href="<?=init?><?=reports?><?=rai?>" class="text-decoration-none text-dark">
+                <i class="bi bi-activity me-2 text-success"></i> Referidos Activos vs. Inactivos
+            </a>
+            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left" title="Muestra cuántos referidos están activos o
+                inactivos para cada usuario.">
+                &#8505;
+            </button>
+        </li>
+        <li class="list-group-item mb-3 fs-5 d-flex justify-content-between align-items-center">
+            <a href="<?=init?><?=reports?><?=vcn?>" class="text-decoration-none text-dark">
+                <i class="bi bi-graph-up-arrow me-2 text-info"></i> Ventas y Comisiones por Nivel
+            </a>
+            <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left" title="Muestra las ventas y las comisiones totales
+                acumuladas por cada nivel.">
+                &#8505;
+            </button>
+        </li>
+    </ul>
+</div>

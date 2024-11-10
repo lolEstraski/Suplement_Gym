@@ -1,0 +1,43 @@
+<?php if(isset($_SESSION['erroriniciarsesion'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroriniciarsesion']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroriniciarsesion'); ?>
+<div class="row col-12 mt-5 mb-3 p-4">
+    <div class="col-6 mt-5 ms-5">
+        <h2 id="loginText" class="text-center">INICIO DE SESIÓN</h2>
+        <br>
+        <h2>Bienvenido al portal de administradores de EDUARD ENERGY DRINKS</h2>
+    </div>
+    <div class="col-5 border ms-4">
+        <br>
+        <br>
+        <form action="<?=init?><?=administrator?><?=login?>" method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control" placeholder="Ingresa tu email" required>
+            </div>
+            <br>
+            <br>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" class="form-control" placeholder="Ingresa tu contraseña"
+                    required>
+            </div>
+            <br>
+            <br>
+            <div class="d-flex justify-content-center">
+                <input type="submit" class="btn btn-primary" value="Ingresar">
+            </div>
+            <br>
+            <br>
+        </form>
+    </div>
+</div>

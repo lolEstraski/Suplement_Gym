@@ -1,0 +1,137 @@
+<?php if(isset($_SESSION['erroractualizar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroractualizar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroractualizar'); ?>
+<?php if(isset($_SESSION['aciertoactualizar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoactualizar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoactualizar'); ?>
+<?php if(isset($_SESSION['erroreliminar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroreliminar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroreliminar'); ?>
+<?php if(isset($_SESSION['aciertoeliminar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoeliminar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoeliminar'); ?>
+<?php if(isset($_SESSION['aciertoregistro'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoregistro']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoregistro'); ?>
+<?php if(isset($_SESSION['errorventana'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['errorventana']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('errorventana'); ?>
+<div class="col-10 m-5">
+    <?php if(sizeof($list) == 0) : ?>
+    <h1 class="text-center mt-5 mb-5">No hay generos creados</h1>
+    <?php else : ?>
+    <h2 class="text-center">Lista de generos</h2>
+    <br>
+    <br>
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    <div class="text-center">Nombre</div>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($list as $listGenres) : ?>
+            <tr>
+                <td>
+                    <div class="text-center">
+                        <?=$listGenres['NAME']?>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a href="<?=init?><?=genre?><?=windowUpdateGenre?>&id=<?=$listGenres['GENRE_ID']?>"
+                            class="btn btn-warning">Actualizar</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModal8" class="btn btn-danger"
+                            data-id="<?=$listGenres['GENRE_ID']?>" href="#">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+    <br>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fs-5" id="exampleModalLabel2">Eliminar Genero</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estas seguro que deseas eliminar este genero?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteGenre">Sí, eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        <a class="btn btn-primary" href="<?=init?><?=genre?><?=windowRegisterGenre?>">Crear generos</a>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<?php if(isset($_SESSION['erroractualizar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroractualizar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroractualizar'); ?>
+<div class="col-12 p-5 m-1 row">
+    <h2 class="text-center">Actualizar</h2>
+    <br>
+    <br>
+    <br>
+    <form
+        action="<?=init?><?=purchasingStatus?><?=updatePurchasingStatus?>&id=<?=$purchasingStatus['PURCHASING_STATUS_ID']?>"
+        method="post">
+        <div class="row">
+            <div class="col-7">
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Nombre
+                            </span>
+                        </div>
+                        <input type="text" name="nameps" value="<?=$purchasingStatus['NAME']?>" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="col-12 row">
+                    <div class="col-6">
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="btn btn-success" value="Actualizar Datos">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-3"></div>
+                <img id="imgRegister" class="img-fluid" src="assets/images/logos/estado.png" alt="">
+                <br>
+            </div>
+        </div>
+    </form>
+</div>

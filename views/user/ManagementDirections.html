@@ -1,0 +1,179 @@
+<?php if(isset($_SESSION['erroreditar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroreditar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroreditar'); ?>
+<?php if(isset($_SESSION['aciertoeliminar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoeliminar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoeliminar'); ?>
+<?php if(isset($_SESSION['erroreliminar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroreliminar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroreliminar'); ?>
+<?php if(isset($_SESSION['aciertoregistro'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoregistro']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoregistro'); ?>
+<?php if(isset($_SESSION['aciertoactualizar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['aciertoactualizar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('aciertoactualizar'); ?>
+<?php if(isset($_SESSION['erroractualizar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroractualizar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroractualizar'); ?>
+<div class="col-12 m-5">
+    <div class="col-10 m-5">
+        <?php if(sizeof($listDirections) == 0) : ?>
+        <h1 class="text-center mt-5 mb-5">No hay direcciones creadas</h1>
+        <?php else : ?>
+        <h2 class="text-center">Mis direcciones</h2>
+        <br>
+        <br>
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        <div class="text-center">Departamento</div>
+                    </th>
+                    <th>
+                        <div class="text-center">Ciudad</div>
+                    </th>
+                    <th>
+                        <div class="text-center">Carrera</div>
+                    </th>
+                    <th>
+                        <div class="text-center">Calle</div>
+                    </th>
+                    <th>
+                        <div class="text-center">Código Postal</div>
+                    </th>
+                    <th>
+                        <div class="text-center">Dirección</div>
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($listDirections as $list) : ?>
+                <tr>
+                    <td>
+                        <div class="text-center">
+                            <?=$list['DEPARTMENT_NAME']?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <?=$list['CITY']?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <?=$list['CARRER']?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <?=$list['STREET']?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <?=$list['POSTAL_CODE']?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <?=$list['DIRECTION']?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a href="<?=init?><?=direction?><?=windowUpdateDirection?>&id=<?=$list['DIRECTION_ID']?>"
+                                class="btn btn-warning">Actualizar</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a data-bs-toggle="modal" data-bs-target="#exampleModal5" class="btn btn-danger"
+                                data-id="<?=$list['DIRECTION_ID']?>" href="#">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php endif; ?>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel5"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title fs-5" id="exampleModalLabel5">Eliminar Dirección</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro que deseas eliminar esta dirección?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteDirection">Sí, eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <a class="btn btn-primary" href="<?=init?><?=direction?><?=windowRegisterDirection?>">Crear direcciones</a>
+        </div>
+    </div>
+</div>

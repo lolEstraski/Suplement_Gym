@@ -1,0 +1,121 @@
+<div class="container mt-5 mx-2">
+    <!-- Encabezado -->
+    <div class="text-center mb-5">
+        <h2>Resumen</h2>
+    </div>
+    <!-- Datos del envío -->
+    <h3 class="mb-3">Datos del Envío</h3>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <p><strong>Carrera:</strong>
+                <?= $direction['CARRER'] ?>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Calle:</strong>
+                <?= $direction['STREET'] ?>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Código Postal:</strong>
+                <?= $direction['POSTAL_CODE'] ?>
+            </p>
+        </div>
+        <div class="col-md-12">
+            <p><strong>Dirección:</strong>
+                <?= $direction['DIRECTION'] ?>
+            </p>
+        </div>
+    </div>
+    <!-- Datos del pago -->
+    <h3 class="mb-3">Datos del Pago</h3>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p><strong>Entidad Bancaria:</strong>
+                <?= $pay['BANKING_ENTITY_NAME'] ?>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Número:</strong>
+                <?= $pay['NUMBER_ELECTION'] ?>
+            </p>
+        </div>
+    </div>
+    <!-- Datos del producto -->
+    <h3 class="mb-3">Datos del Producto</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Vendedor</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Contenido</th>
+                <th>Unidades</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($list as $listCar) : ?>
+            <tr>
+                <td>
+                    <?= $listCar['NAME_SELLER'] ?>
+                    <?= $listCar['SURNAME'] ?>
+                </td>
+                <td>
+                    <?= $listCar['NAME_PRODUCT'] ?>
+                </td>
+                <td>
+                    <?='$'.number_format($listCar['PRICE'], 0, ','); ?>
+                </td>
+                <td>
+                    <?= $listCar['CONTENT'] ?>
+                </td>
+                <td>
+                    <?= $listCar['AMOUNT'] ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <!-- Total -->
+    <br>
+    <h3 class="text-end mt-4">Subtotal:
+        <?='$'.number_format($total, 0, ','); ?>
+    </h3>
+    <h3 class="text-end mt-4 text-danger">Descuento:
+        <?='$'.number_format($descuento, 0, ','); ?>
+    </h3>
+    <h3 class="text-end mt-4 text-success">Total:
+        <?='$'.number_format(($total - $descuento), 0, ','); ?>
+    </h3>
+    </h3>
+    <br>
+    <div class="text-center">
+        <form id="purchaseForm" action="<?= init ?><?= transaction ?><?= purchase ?>" method="post">
+            <input type="hidden" name="id_direction" value="<?= $idDirection ?>">
+            <input type="hidden" name="id_pay" value="<?= $idPay ?>">
+            <input type="hidden" name="total" value="<?= ($total - $descuento)?>">
+            <input type="hidden" name="descuento" value="<?= $descuento?>">
+            <button type="button" class="btn btn-primary" id="openModalBtn">Realizar compra</button>
+        </form>
+        <br>
+        <br>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalLabel">Compra Exitosa</h5>
+                <!-- Elimina el botón de cierre -->
+            </div>
+            <div class="modal-body">
+                <?php echo "La compra se ha realizado exitosamente"; ?>
+            </div>
+            <div class="modal-footer">
+                <!-- Único botón para confirmar y enviar el formulario -->
+                <button type="button" class="btn btn-primary" id="confirmPurchase">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>

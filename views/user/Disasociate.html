@@ -1,0 +1,25 @@
+<?php if(isset($_SESSION['errordesvinculacion'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['errordesvinculacion']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('errordesvinculacion'); ?>
+<div class="container m-5 w-75">
+    <br>
+    <h2 class="mb-4 text-center">Explícanos el motivo</h2>
+    <div class="form-group w-75">
+        <textarea class="form-control textarea-narrow" id="motivo" rows="5"
+            placeholder="Escribe aquí tu motivo..."></textarea>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+        <a href="<?=init?><?=user?><?=disasociate?>&id=<?=$idUser?>" class="btn btn-success">Desvincularse</a>
+    </div>
+    <br>
+</div>

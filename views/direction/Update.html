@@ -1,0 +1,122 @@
+<?php if(isset($_SESSION['erroractualizar'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['erroractualizar']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('erroractualizar'); ?>
+<div class="col-12 p-5 m-1 row">
+    <h2 class="text-center">Actualizar</h2>
+    <br>
+    <br>
+    <br>
+    <form action="<?=init?><?=direction?><?=updateDirection?>&id=<?=$direction['DIRECTION_ID']?>" method="post"
+        enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-7">
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Departamento
+                            </span>
+                        </div>
+                        <select name="department" name="department" class="form-control" required>
+                            <?php foreach($listDepartments as $departments) : ?>
+                            <option value="<?=$departments['DEPARTMENT_ID']?>"
+                                <?=($direction['DEPARTMENT_NAME']==$departments['NAME']) ? 'selected' : '' ?>>
+                                <?=$departments['NAME']?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Ciudad
+                            </span>
+                        </div>
+                        <input type="text" name="city" value="<?=$direction['CITY']?>" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Carrera
+                            </span>
+                        </div>
+                        <input type="text" name="carrer" value="<?=$direction['CARRER']?>" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Calle
+                            </span>
+                        </div>
+                        <input type="number" name="street" value="<?=$direction['STREET']?>" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Codigo Postal
+                            </span>
+                        </div>
+                        <input type="number" name="postal_code" value="<?=$direction['POSTAL_CODE']?>"
+                            class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0">
+                                Direccion
+                            </span>
+                        </div>
+                        <input type="text" name="direction" value="<?=$direction['DIRECTION']?>" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="col-12 row">
+                    <div class="col-6">
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="btn btn-success" value="Actualizar Datos">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="col-3"></div>
+                <img id="imgRegister" class="img-fluid" src="assets/images/logos/mapa.png" alt="">
+                <br>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,157 @@
+<?php if(isset($_SESSION['errorcambio'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['errorcambio']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('errorcambio'); ?>
+<div class="container mt-5 mx-2">
+    <!-- Encabezado -->
+    <div class="text-center mb-5">
+        <h2>Factura</h2>
+        <p class="text-muted">Fecha:
+            <?= date('d-m-Y') ?>
+        </p>
+    </div>
+    <!-- Datos del comprador -->
+    <h4 class="mb-3">Datos del Comprador</h4>
+    <div class="row mb-4">
+        <?php if($detail[0]['USER_NAME'] == NULL) : ?>
+        <div class="col-md-4">
+            <p><strong>Nombre: Tienda</p>
+        </div>
+        <?php else : ?>
+        <div class="col-md-4">
+            <p><strong>Nombre:</strong>
+                <?= $detail[0]['USER_NAME'] ?>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Apellidos:</strong>
+                <?= $detail[0]['SURNAME'] ?>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Email:</strong>
+                <?= $detail[0]['EMAIL'] ?>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Telefono:</strong>
+                <?= $detail[0]['PHONE'] ?>
+            </p>
+        </div>
+        <?php endif; ?>
+    </div>
+    <!-- Datos del envío -->
+    <h4 class="mb-3">Datos del Envío</h4>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <p><strong>Ciudad:</strong>
+                <?= $detail[0]['CITY'] ?>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Carrera:</strong>
+                <?= $detail[0]['CARRER'] ?>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Calle:</strong>
+                <?= $detail[0]['STREET'] ?>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Código Postal:</strong>
+                <?= $detail[0]['POSTAL_CODE'] ?>
+            </p>
+        </div>
+    </div>
+    <!-- Datos del pago -->
+    <h4 class="mb-3">Datos del Pago</h4>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p><strong>Entidad Bancaria:</strong>
+                <?= $detail[0]['BANK_ENTITY_NAME'] ?>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Número de elección:</strong>
+                <?= $detail[0]['NUMBER_ELECTION'] ?>
+            </p>
+        </div>
+    </div>
+    <br>
+    <!-- Botón Cambiar Estado -->
+    <div class="row mt-3">
+        <div class="col text-start">
+            <form action="<?=init?><?=administrator?><?=changeStatusAdministrator?>&id=<?=$detail[0]['TRPR_ID']?>"
+                method="POST" class="d-inline">
+                <select name="purchaseStatus" class="form-select d-inline" style="width: auto;" required>
+                    <?php foreach($listPurchasingStatus as $purchasingStatus) : ?>
+                    <option value="<?=$purchasingStatus['PURCHASING_STATUS_ID']?>"
+                        <?=($detail[0]['NAME_PURCHASING_STATUS']==$purchasingStatus['NAME']) ? 'selected' : '' ?>>
+                        <?=$purchasingStatus['NAME']?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+                <button type="submit" class="btn btn-primary">Cambiar estado</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- Datos del producto -->
+    <h4 class="mb-3">Datos del Producto</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Contenido</th>
+                <th>Unidades</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($detail as $listCar) : ?>
+            <tr>
+                <td>
+                    <?= $listCar['PRODUCT_NAME'] ?>
+                </td>
+                <td>
+                    <?='$'.number_format($listCar['PRICE'], 0, ','); ?>
+                </td>
+                <td>
+                    <?= $listCar['CONTENT'] ?>
+                </td>
+                <td>
+                    <?= $listCar['UNITS'] ?>
+                </td>
+            </tr>
+            <?php $total += ($listCar['PRICE'] * $listCar['UNITS'])?>
+            <?php endforeach; ?>
+            <?php $discount = $listCar['DISCOUNT']?>
+        </tbody>
+    </table>
+    <!-- Total -->
+    <div class="text-end mt-4">
+        <br>
+        <h3>Subtotal:
+            <?='$'.number_format($total, 0, ','); ?>
+        </h3>
+        <h3 class="text-danger">Descuento:
+            <?='$'.number_format($discount, 0, ','); ?>
+        </h3>
+        <h3 class="text-success">Total:
+            <?='$'.number_format(($total - $discount), 0, ','); ?>
+        </h3>
+    </div>
+    <br>
+    <br>
+</div>

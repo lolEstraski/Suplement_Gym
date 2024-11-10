@@ -1,0 +1,95 @@
+<?php if(isset($_SESSION['errortransaccion'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['errortransaccion']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('errortransaccion'); ?>
+<div class="container m-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Metodo De Pago</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Direccion De Envio</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                aria-selected="false">Metodo De Pago</a>
+        </li>
+    </ul>
+    <div class="m-5">
+        <form action="<?=init?><?=transaction?><?=confirm?>" method="post">
+            <input type="hidden" name="total" value="<?=$total?>">
+            <input type="hidden" name="descuento" value="<?=$descuento?>">
+            <div class="tab-content mt-3" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="text-center">
+                        <img src="assets/images/logos/bag.png" alt="">
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <?php if(count($listDirections) > 0) : ?>
+                    <h4>Selecciona tu direccion</h4>
+                    <br>
+                    <?php foreach($listDirections as $list) : ?>
+                    <div>
+                        <input type="radio" id="pay_id" name="id_direction" value="<?=$list['DIRECTION_ID']?>" checked>
+                        <label class="d-block" for="id_direction">Carrera:
+                            <?=$list['CARRER']?>
+                        </label>
+                        <label class="d-block" for="id_direction">Calle:
+                            <?=$list['STREET']?>
+                        </label>
+                        <label class="d-block" for="id_direction">Codigo Postal:
+                            <?=$list['POSTAL_CODE']?>
+                        </label>
+                        <label class="d-block" for="id_direction">Direccion:
+                            <?=$list['DIRECTION']?>
+                        </label>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php else : ?>
+                    <h4>No tienes ninguna direccion creada</h4>
+                    <div class="d-flex justify-content-center mt-4">
+                        <a class="btn btn-primary" href="<?=init?><?=direction?><?=windowRegisterDirection?>">Crear
+                            direccion</a>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <?php if(count($listPays) > 0) : ?>
+                    <h4>Selecciona tu metodo de pago de preferencia</h4>
+                    <br>
+                    <?php foreach($listPays as $list) : ?>
+                    <div>
+                        <input type="radio" id="pay_direction" name="id_pay" value="<?=$list['PAY_ID']?>" checked>
+                        <label class="d-block" for="id_pay">Eleccion:
+                            <?=$list['NAME']?>
+                        </label>
+                        <label class="d-block" for="id_pay">Numero:
+                            <?=$list['NUMBER_ELECTION']?>
+                        </label>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php else : ?>
+                    <h4>No tienes ningun pago creado</h4>
+                    <div class="d-flex justify-content-center mt-4">
+                        <a class="btn btn-primary" href="<?=init?><?=pay?><?=windowRegisterPay?>">Crear pago</a>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php if(count($listDirections) > 0 && count($listPays) > 0) : ?>
+            <input class="btn btn-primary mt-5" type="submit" value="Realizar Compra">
+            <?php endif; ?>
+        </form>
+    </div>
+</div>

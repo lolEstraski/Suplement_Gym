@@ -1,0 +1,57 @@
+<?php if($report == null) : ?>
+<div class="m-5">
+    <h1 class="p-5 text-center">No hay datos para el reporte</h1>
+</div>
+<?php else : ?>
+<div style="margin-top: 40px; margin-bottom: 40px;">
+    <img src="assets/images/logos/logotienda.png" style="width: 100px; height: 100px; margin-left: 315px;">
+    <br>
+    <br>
+    <h2 style="text-align: center;">Eduard Energy Drinks</h2>
+    <br>
+    <br>
+    <h4 style="text-align: center;">"Despierta el poder dentro de ti, recarga cada instante y alcanza el máximo
+        rendimiento con la energía que te impulsa a lograr lo imposible."</h4>
+    <br>
+    <br>
+    <p style="text-align: center;">Reporte generado:
+        <?=Helps::today();?>
+    </p>
+    <br>
+    <br>
+    <h2 style="text-align: center; margin-bottom: 20px; font-weight: bold;">Comisiones Ganadas Por Usuario</h2>
+    <br>
+    <div style="width: 100%; margin: 0 auto;">
+        <table style="width: 90%; border-collapse: collapse; margin: 0 auto; text-align: left;">
+            <thead style="color: black; background-color: rgb(235, 241, 241); font-size: 19px;">
+                <tr>
+                    <th style="width: 20%; padding: 8px; border: 1px solid #ddd;">ID Usuario</th>
+                    <th style="width: 40%; padding: 8px; border: 1px solid #ddd;">Nombre</th>
+                    <th style="width: 40%; padding: 8px; border: 1px solid #ddd;">Total Comisiones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($report as $comision): ?>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <?= $comision['USER_ID'] ?>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <?= $comision['NAME'] ?>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <?= '$' . number_format($comision['TOTAL_COMISIONES'], 2, '.', ',') ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="<?=init?><?=reports?><?=generatePdf?>&report=Cgpu"
+            style="display: inline-block; padding: 6px 13px; background-color: #007bff; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">Generar
+            PDF</a>
+    </div>
+</div>
+<?php endif; ?>

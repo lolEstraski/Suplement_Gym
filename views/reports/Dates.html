@@ -1,0 +1,43 @@
+<?php if(isset($_SESSION['errorreport'])) : ?>
+<div id="alerta2" class="position-absolute col-6">
+    <div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Informacion: </strong>
+            <?=$_SESSION['errorreport']?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php helps::deleteSession('errorreport'); ?>
+<div class="col-12 p-5 m-1 row">
+    <h2 class="text-center">Ingresa el rango de fechas en el cual quieres filtrar</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form action="<?=init?><?=reports?><?=dates?>" method="post">
+        <div class="col-12 row">
+            <div class="form-group">
+                <label for="init">Fecha De Inicio</label>
+                <input type="date" name="init" class="form-control" required>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="form-group">
+                <label for="end">Fecha Final</label>
+                <input type="date" name="end" class="form-control" required>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="d-flex justify-content-center">
+                <input type="submit" class="btn btn-success" value="Obtener Reporte">
+            </div>
+        </div>
+    </form>
+</div>
