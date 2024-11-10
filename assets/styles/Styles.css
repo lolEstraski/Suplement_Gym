@@ -1,195 +1,457 @@
 @font-face {
-    font-family: 'Banger';
-    src: url('../fonts/Banger/Bangers-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Banger';
+  src: url('../fonts/Banger/Bangers-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-#menu{
-    height: 50px;
+body {
+  overflow-x: hidden;
 }
 
-#menu ul{
-    text-decoration: none;
-    list-style: none;
-    line-height: 50px;
+#menu {
+  height: 50px;
 }
 
-#logotipoprincipal{
-    width: 125px !important;
-    height: 125px !important;
+#menu ul {
+  text-decoration: none;
+  list-style: none;
+  line-height: 50px;
 }
 
-#gestionAdmin{
-    width: 200px;
-    height: 200px;
-    margin-left: 150px;
+#logotipoprincipal {
+  width: 125px !important;
+  height: 125px !important;
 }
 
-#payImage{
-    width: 300px;
-    height: 300px;
+#gestionAdmin {
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.lupa{
-    margin-top: 15px;
-    margin-left: 5px;
-    width: 20px;
-    height: 20px;
+#payImage {
+  width: 300px;
+  height: 300px;
 }
 
-#alerta{
-    margin-top: 340px; 
-    margin-left: 40px;
+.lupa {
+  margin-top: 15px;
+  margin-left: 5px;
+  width: 20px;
+  height: 20px;
 }
 
-.car{
-    width: 25px;
-    height: 25px;
+#alerta {
+  margin-top: 340px;
+  margin-left: 40px;
 }
 
-#alerta2{
-    margin-top: 280px; 
-    margin-left: 40px;
+.car {
+  width: 25px;
+  height: 25px;
 }
 
-#home{
-    text-decoration: none;
+#alerta2 {
+  margin-top: 280px;
+  margin-left: 40px;
 }
 
-.item{
-    height: 150px;
+#home {
+  text-decoration: none;
 }
 
-#enlace{
-    color: black;
+.item {
+  height: 150px;
 }
 
-#navbar{
-    background-color: #33ffe9;
+#enlace {
+  color: black;
 }
 
-#header{
-    background-color: black;
+#navbar, .custom-header {
+  background-color: #337eff;
+}
+
+#header {
+  background-color: black;
 }
 
 .custom-header {
-    background-color: #33ffe9;
-    color: black;
+  color: black;
 }
 
 .pyramid-level {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
+
 .pyramid-item {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 5px;
-    margin: 5px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
-    width: 150px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
 }
+
 .pyramid-level-1 .pyramid-item { width: 200px; font-weight: bold; }
 .pyramid-level-2 .pyramid-item { width: 180px; }
 .pyramid-level-3 .pyramid-item { width: 160px; }
 .pyramid-level-4 .pyramid-item { width: 140px; }
 
-#tituloPrincipal{
-    color: #33ffe9;
-    margin-top: 20px;
+#tituloPrincipal {
+  color: #337eff;
+  margin-top: 50px;
 }
 
-footer{
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    background-color: #33ffe9;
+footer {
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  background-color: rgb(10, 71, 157);
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
 }
 
-footer p{
-    color: black;
+footer p, footer a {
+  color: white;
+  margin: 0 10px;
+  font-size: 14px;
 }
 
-#footer{
-    border-top: 10px solid black;
+footer a:hover {
+  color: #337eff;
 }
 
-body {
-    overflow-x: hidden;
+.container {
+  border: 1px solid #ddd;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.container{
-    border: 1px solid #ddd;
-    background-color: white;
+.container-fluid h1 {
+  text-shadow: 0px 3px 2px #222222, 1px 1px 5px #01b1ea;
+  transition: all 300ms;
+  font-family: 'Bangers', cursive;
+  font-size: 60px;
 }
 
-.container-fluid h1{
-    text-shadow: 0px 3px 2px #222222, 1px 1px 5px #01b1ea;
-    transition: all 300ms;
-    font-family: 'Bangers', cursive;
-    font-size: 60px;
+.container-fluid h1:hover {
+  text-shadow: 0px 3px 2px #222222, 2px 2px 10px #01b1ea;
 }
 
-.container-fluid h1:hover{
-    text-shadow: 0px 3px 2px #222222, 2px 2px 10px #01b1ea;
+footer p {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-family: 'Bangers', cursive;
+  font-size: 28px;
 }
 
-footer p{
-    margin-top: 30px;
-    margin-bottom: 20px;
-    font-family: 'Bangers', cursive;
-    font-size: 28px;
+.btn-outline-success {
+  transition: all 500ms;
 }
 
-.btn-outline-success{
-    transition: all 500ms;
+.btn-outline-success:hover, .btn-outline-success:active {
+  background-color: #000000;
+  color: white !important;
 }
 
-.btn-outline-success:hover{
-    background-color: #000000;
-    color: white !important;
+.card-body p {
+  font-weight: 700;
+  font-size: 20px;
 }
 
-.btn-outline-success:active{
-    background-color: #000000 !important;
-    color: white !important;
+#imgRegister, #imgNetwork, #imgClave {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.card-body p{
-    font-weight: 700;
-    font-size: 20px;
+#imgRegister {
+  width: 350px;
+  height: 350px;
 }
 
-#imgRegister{
-    width: 350px;
-    height: 350px;
-    margin-top: 100px;
-    margin-left: 50px;
+#imgNetwork {
+  width: 250px;
+  height: 250px;
 }
 
-#imgNetwork{
-    width: 250px;
-    height: 250px;
-    margin-top: 100px;
-    margin-left: 50px;
+#imgClave {
+  width: 275px;
+  height: 275px;
+  margin-top: 50px;
 }
 
-#imgClave{
-    width: 275px;
-    height: 275px;
-    margin-top: 50px;
-    margin-left: 100px;
+#loginText {
+  text-shadow: 0px 3px 2px #000000, 2px 2px 7px #01b1ea;
+  font-family: 'Bangers', cursive;
+  font-size: 38px;
 }
 
-#loginText{
-    text-shadow: 0px 3px 2px #000000, 2px 2px 7px #01b1ea;
-    font-family: 'Bangers', cursive;
-    font-size: 38px;
+#gestionesAdmin li {
+  list-style: none;
 }
 
-#gestionesAdmin li{
-    list-style: none;
+.carousel-indicators button {
+  background-color: #337eff;
+}
+
+.carousel-indicators .active {
+  background-color: #000;
+}
+
+.card-img-container {
+  height: 400px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  display: inline-block;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+.social-icons img {
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+.social-icons a:hover {
+  color: #000;
+}
+
+.custom-footer {
+  background-color: black;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.list-group-item a {
+  color: black;
+  transition: color 0.3s;
+}
+
+.list-group-item a:hover {
+  color: #337eff;
+}
+
+.badge {
+  font-size: 1.2rem;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #337eff;
+  color: white;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-body h4 {
+  margin-bottom: 1rem;
+}
+
+.card-body p {
+  margin-bottom: 1.5rem;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-group .btn {
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-group .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-warning {
+  color: #fff;
+  background-color: #138496;
+  border-color: #138496;
+}
+
+.btn-warning:hover {
+  background-color: #117a8b;
+  border-color: #117a8b;
+  color: #fff;
+}
+
+.drop-zone {
+  width: 100%;
+  min-height: 200px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  color: #6c757d;
+  border: 2px dashed #009578;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.drop-zone__prompt {
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.drop-zone--over {
+  border-style: solid;
+  background-color: rgba(0, 149, 120, 0.1);
+}
+
+.drop-zone:hover {
+  background-color: #e9ecef;
+}
+
+.img-preview {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #337eff;
+  border-color: #337eff;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #285ec7;
+  transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+  color: #337eff;
+  border-color: #337eff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-primary:hover {
+  background-color: #337eff;
+  color: #fff;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+  color: #fff;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.user-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 800px;
+  width: 100%;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.user-image {
+  width: 135px;
+  height: 135px;
+  border: 2px solid #337eff;
+}
+
+.user-info h4, .user-info h5, .user-info p {
+  margin-bottom: 10px;
+}
+
+.delete-button {
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+/* Add styles for the "Crear" and "Actualizar Datos" buttons */
+.btn-success {
+  background-color: #337eff;
+  border-color: #337eff;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-success:hover {
+  background-color: #285ec7;
+  transform: translateY(-2px);
 }
