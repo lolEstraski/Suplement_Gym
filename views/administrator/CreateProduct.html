@@ -1,62 +1,245 @@
 <?php if(isset($_SESSION['errorregistro'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['errorregistro']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3" role="alert" style="z-index: 1050;">
+        <strong>Información: </strong><?=$_SESSION['errorregistro']?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+<?php helps::deleteSession('errorregistro'); ?>
+
+<div class="container py-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white p-4">
+            <h2 class="text-center mb-0">
+                <i class="fas fa-box-open me-2"></i>Registro de Producto
+            </h2>
+        </div>
+        
+        <div class="card-body p-4">
+            <form action="<?=init?><?=administrator?><?=registerProductAdmin?>" 
+                  method="post" 
+                  enctype="multipart/form-data" 
+                  class="needs-validation" 
+                  novalidate>
+                
+                <div class="row g-4">
+                    <!-- Columna Principal -->
+                    <div class="col-md-8">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <!-- Nombre del Producto -->
+                                <div class="mb-4">
+                                    <label for="name" class="form-label fw-bold">
+                                        <i class="fas fa-tag me-2"></i>Nombre del Producto
+                                    </label>
+                                    <input type="text" 
+                                           name="name" 
+                                           class="form-control form-control-lg" 
+                                           required
+                                           minlength="3"
+                                           data-bs-toggle="tooltip"
+                                           title="Ingrese el nombre del producto">
+                                    <div class="invalid-feedback">
+                                        El nombre es requerido (mínimo 3 caracteres)
+                                    </div>
+                                </div>
+
+                                <!-- Precio y Unidades -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <label for="price" class="form-label fw-bold">
+                                            <i class="fas fa-dollar-sign me-2"></i>Precio
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" 
+                                                   name="price" 
+                                                   class="form-control" 
+                                                   required
+                                                   min="0"
+                                                   step="0.01">
+                                            <div class="invalid-feedback">
+                                                Ingrese un precio válido
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="units" class="form-label fw-bold">
+                                            <i class="fas fa-boxes me-2"></i>Unidades
+                                        </label>
+                                        <input type="number" 
+                                               name="units" 
+                                               class="form-control" 
+                                               required
+                                               min="1">
+                                    </div>
+                                </div>
+
+                                <!-- Contenido -->
+                                <div class="mb-4">
+                                    <label for="content" class="form-label fw-bold">
+                                        <i class="fas fa-info-circle me-2"></i>Contenido
+                                    </label>
+                                    <input type="text" 
+                                           name="content" 
+                                           class="form-control" 
+                                           required>
+                                </div>
+
+                                <!-- Stock -->
+                                <div class="mb-4">
+                                    <label for="stock" class="form-label fw-bold">
+                                        <i class="fas fa-warehouse me-2"></i>Stock
+                                    </label>
+                                    <input type="number" 
+                                           name="stock" 
+                                           class="form-control" 
+                                           required
+                                           min="0">
+                                </div>
+
+                                <!-- Descripción -->
+                                <div class="mb-4">
+                                    <label for="description" class="form-label fw-bold">
+                                        <i class="fas fa-align-left me-2"></i>Descripción
+                                    </label>
+                                    <textarea name="description" 
+                                              class="form-control" 
+                                              rows="4"
+                                              placeholder="Describe el producto detalladamente..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna de Imagen -->
+                    <div class="col-md-4">
+                        <!-- Modified Image Upload Section -->
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-image me-2"></i>Imagen del Producto
+                                    </label>
+                                    <div class="drop-zone" id="dropZone">
+                                        <span class="drop-zone__prompt">
+                                            Arrastra la imagen aquí o haz clic para seleccionar
+                                        </span>
+                                        <input type="file" 
+                                               name="image" 
+                                               class="drop-zone__input" 
+                                               accept="image/*"
+                                               required
+                                               onchange="previewImage(this);">
+                                    </div>
+                                    <div id="imagePreview" class="mt-3 text-center d-none">
+                                        <img src="" alt="Vista previa" class="img-preview rounded">
+                                        <button type="button" class="btn btn-sm btn-danger mt-2" onclick="removeImage()">
+                                            <i class="fas fa-trash me-2"></i>Eliminar imagen
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="row mt-4">
+                    <div class="col-12 text-center">
+                        <div class="btn-group">
+                            <a href="<?=init?><?=administrator?><?=windowManagementProducts?>" 
+                               class="btn btn-secondary btn-lg me-2">
+                                <i class="fas fa-arrow-left me-2"></i>Volver
+                            </a>
+                            <button type="reset" 
+                                    class="btn btn-warning btn-lg me-2">
+                                <i class="fas fa-undo me-2"></i>Limpiar
+                            </button>
+                            <button type="submit" 
+                                    class="btn btn-primary btn-lg">
+                                <i class="fas fa-save me-2"></i>Guardar Producto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
 </div>
-<?php endif; ?>
-<?php helps::deleteSession('errorregistro'); ?>
-<div class="col-12 p-5 m-1 row">
-    <h2 class="text-center">Formulario de registro</h2>
-    <br>
-    <br>
-    <form action="<?=init?><?=administrator?><?=registerProductAdmin?>" method="post" enctype="multipart/form-data">
-        <div class="col-12 row">
-            <div class="col-6 me-5">
-                <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" name="name" class="form-control" required>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="price">Precio</label>
-                    <input type="number" name="price" class="form-control" required>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="unity">Unidades</label>
-                    <input type="number" name="units" class="form-control" required>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="content">Contenido</label>
-                    <input type="text" name="content" class="form-control" required>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="stock">Stock</label>
-                    <input type="number" name="stock" class="form-control" required>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="description">Descripcion</label>
-                    <textarea name="description" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="col-4">
-                <img id="imgRegister" class="d-block" src="assets/images/logos/drink.png" alt="">
-                <br>
-                <label for="formFile" class="form-label">Subir foto de perfil</label>
-                <input class="form-control" id="formFile" type="file" name="image" accept="image/*" required>
-            </div>
-        </div>
-        <br>
-        <div class="d-flex justify-content-center">
-            <input type="submit" class="btn btn-success" value="Crear">
-        </div>
-    </form>
-</div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('imgPreview');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Bootstrap form validation
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const img = preview.querySelector('img');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                img.src = e.target.result;
+                preview.classList.remove('d-none');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function removeImage() {
+        const preview = document.getElementById('imagePreview');
+        const input = document.querySelector('.drop-zone__input');
+        const img = preview.querySelector('img');
+        
+        input.value = '';
+        img.src = '';
+        preview.classList.add('d-none');
+    }
+
+    // Drag and drop functionality
+    document.querySelector('.drop-zone').addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.currentTarget.classList.add('drop-zone--over');
+    });
+
+    ['dragleave', 'dragend'].forEach(type => {
+        document.querySelector('.drop-zone').addEventListener(type, (e) => {
+            e.currentTarget.classList.remove('drop-zone--over');
+        });
+    });
+
+    document.querySelector('.drop-zone').addEventListener('drop', (e) => {
+        e.preventDefault();
+
+        if (e.dataTransfer.files.length) {
+            document.querySelector('.drop-zone__input').files = e.dataTransfer.files;
+            previewImage(document.querySelector('.drop-zone__input'));
+        }
+
+        e.currentTarget.classList.remove('drop-zone--over');
+    });
+</script>

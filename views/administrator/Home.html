@@ -1,79 +1,144 @@
-<?php if(isset($_SESSION['aciertoiniciarsesion'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['aciertoiniciarsesion']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<?php
+// Definir el array de gestiones y sus iconos
+$managementOptions = [
+    [
+        'title' => 'Gestión de usuarios',
+        'route' => windowManagementUsers,
+        'icon' => '👥',
+        'description' => 'Administrar usuarios del sistema'
+    ],
+    [
+        'title' => 'Gestión de géneros',
+        'route' => windowManagementGenres,
+        'icon' => '⚧',
+        'description' => 'Configurar géneros disponibles'
+    ],
+    [
+        'title' => 'Gestión de departamentos',
+        'route' => windowManagementDepartments,
+        'icon' => '🏢',
+        'description' => 'Administrar departamentos'
+    ],
+    [
+        'title' => 'Gestión de estados de compra',
+        'route' => windowManagementPurchasingStatus,
+        'icon' => '🛍️',
+        'description' => 'Configurar estados de compras'
+    ],
+    [
+        'title' => 'Gestión de entidades bancarias',
+        'route' => windowManagementBankEntities,
+        'icon' => '🏦',
+        'description' => 'Administrar bancos'
+    ],
+    [
+        'title' => 'Gestión de noticias',
+        'route' => windowManagementNews,
+        'icon' => '📰',
+        'description' => 'Gestionar noticias del sistema'
+    ],
+    [
+        'title' => 'Gestión de productos',
+        'route' => windowManagementProducts,
+        'icon' => '📦',
+        'description' => 'Administrar catálogo de productos'
+    ],
+    [
+        'title' => 'Asignar Fundadores',
+        'route' => windowAddUserAdmin,
+        'icon' => '👑',
+        'description' => 'Gestionar usuarios fundadores'
+    ],
+    [
+        'title' => 'Piramide de usuarios',
+        'route' => pyramid,
+        'icon' => '🔼',
+        'description' => 'Gestionar la piramide de usuarios'
+    ],
+    [
+    'title' => 'Reportes',
+    'route' => windowReports,
+    'icon' => ' 📊',
+    'description' => 'Generar reportes del sistema'
+]
+    
+];
+?>
+
+<!-- Alerta de sesión -->
+<?php if (!empty($_SESSION['aciertoiniciarsesion'])) : ?>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">¡Éxito!</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <?= htmlspecialchars($_SESSION['aciertoiniciarsesion'], ENT_QUOTES, 'UTF-8') ?>
+            </div>
         </div>
     </div>
-</div>
+    <?php helps::deleteSession('aciertoiniciarsesion'); ?>
 <?php endif; ?>
-<?php helps::deleteSession('aciertoiniciarsesion'); ?>
-<div class="container my-5 p-4 bg-light rounded shadow">
-    <div class="text-center">
-        <h1>Gestiones</h1>
-        <br>
-        <p class="lead text-secondary">Administra y organiza las diferentes secciones del sistema</p>
+
+<!-- Contenido principal -->
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Panel de Gestión</h1>
+        <p class="lead text-muted">Seleccione una opción para administrar</p>
     </div>
-    <ul id="gestionesAdmin" class="list-group mt-4">
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowManagementUsers?>" class="text-decoration-none text-dark">
-                <i class="bi bi-people-fill me-2 text-primary"></i> Gestión de usuarios
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowManagementGenres?>" class="text-decoration-none text-dark">
-                <i class="bi bi-music-note-list me-2 text-success"></i> Gestión de géneros
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowManagementDepartments?>"
-                class="text-decoration-none text-dark">
-                <i class="bi bi-building me-2 text-info"></i> Gestión de departamentos
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowManagementPurchasingStatus?>"
-                class="text-decoration-none text-dark">
-                <i class="bi bi-cart-check me-2 text-warning"></i> Gestión de estados de compra
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowManagementBankEntities?>"
-                class="text-decoration-none text-dark">
-                <i class="bi bi-bank me-2 text-danger"></i> Gestión de entidades bancarias
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowManagementNews?>" class="text-decoration-none text-dark">
-                <i class="bi bi-newspaper me-2 text-primary"></i> Gestión de noticias
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowManagementProducts?>" class="text-decoration-none text-dark">
-                <i class="bi bi-box-seam me-2 text-success"></i> Gestión de productos
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowAddUserAdmin?>" class="text-decoration-none text-dark">
-                <i class="bi bi-person-plus me-2 text-info"></i> Asignar Fundadores
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=windowReports?>" class="text-decoration-none text-dark">
-                <i class="bi bi-graph-up me-2 text-warning"></i> Reportes
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=pyramid?>" class="text-decoration-none text-dark">
-                <i class="bi bi-diagram-3 me-2 text-danger"></i> Pirámide
-            </a>
-        </li>
-        <li class="list-group-item mb-3 fs-5 text-center">
-            <a href="<?=init?><?=administrator?><?=sales?>" class="text-decoration-none text-dark">
-                <i class="bi bi-diagram-3 me-2 text-danger"></i> Gestion de ventas
-            </a>
-        </li>
-    </ul>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+        <?php foreach ($managementOptions as $option) : ?>
+            <div class="col">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body">
+                        <a href="<?= htmlspecialchars(init . administrator . $option['route'], ENT_QUOTES, 'UTF-8') ?>" 
+                           class="text-decoration-none text-dark">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="display-5 me-3"><?= $option['icon'] ?></span>
+                                <h5 class="card-title mb-0"><?= htmlspecialchars($option['title'], ENT_QUOTES, 'UTF-8') ?></h5>
+                            </div>
+                            <p class="card-text text-muted"><?= htmlspecialchars($option['description'], ENT_QUOTES, 'UTF-8') ?></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
+
+<style>
+.hover-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.toast {
+    opacity: 1;
+    animation: fadeOut 0.5s ease-in-out 3s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar los toasts de Bootstrap
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+    var toastList = toastElList.map(function(toastEl) {
+        return new bootstrap.Toast(toastEl, {
+            autohide: true,
+            delay: 3000
+        });
+    });
+});
+</script>

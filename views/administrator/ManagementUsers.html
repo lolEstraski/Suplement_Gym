@@ -1,110 +1,44 @@
-<?php if(isset($_SESSION['recuperaracierto'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['recuperaracierto']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('recuperaracierto'); ?>
-<?php if(isset($_SESSION['recuperarerror'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['recuperarerror']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('recuperarerror'); ?>
-<?php if(isset($_SESSION['eliminaracierto'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['eliminaracierto']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('eliminaracierto'); ?>
-<?php if(isset($_SESSION['erroreliminar'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['erroreliminar']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('erroreliminar'); ?>
 <div class="m-5">
     <?php if(sizeof($list) == 0) : ?>
-    <h1 class="text-center mt-5 mb-5">No hay usuarios registrados</h1>
+        <h1 class="text-center mt-5 mb-5">No hay usuarios registrados</h1>
     <?php else : ?>
-    <div class="text-center">
-        <h2>Lista de usuarios</h2>
-        <br>
-        <div class="m-5">
-            <?php foreach($list as $listUsers) : ?>
-            <div class="d-flex justify-content-between align-items-center p-2 border rounded mb-5"
-                style="max-width: 800px; margin: auto;">
-                <!-- Imagen del usuario (más grande) -->
-                <img src="resources/imagesUsers/<?=$listUsers['IMAGE']?>" alt="Foto de <?=$listUsers['NAME']?>"
-                    class="rounded-circle ms-5" style="width: 135px; height: 135px;">
-                <!-- Nombre y apellidos del usuario -->
-                <div class="p-5">
-                    <h4 class="">
-                        <?=$listUsers['NAME']?>
-                    </h4>
-                    <h4 class="">
-                        <?=$listUsers['SURNAME']?>
-                    </h4>
-                    <?php if($listUsers['HIGUER_SURNAME'] == NULL) : ?>
-                    <?php if($listUsers['FOUNDER'] == 1) : ?>
-                    <h5>Usuario fundador Nivel 1</h5>
-                    <?php else : ?>
-                    <h5>Usuario externo</h5>
-                    <?php endif; ?>
-                    <?php else : ?>
-                    <h5>Nivel:
-                        <?=$listUsers['LEVEL_USER']?>
-                    </h5>
-                    <h5>Usuario Superior:</h5>
-                    <h5>
-                        <?=$listUsers['HIGHER_NAME']?>
-                        <?=$listUsers['HIGUER_SURNAME']?>
-                    </h5>
-                    <?php endif; ?>
-                    <?php if($listUsers['ACTIVE'] == 1) : ?>
-                    <p class="">Fecha De Union:
-                        <?=$listUsers['CREATED_AT']?>
-                    </p>
-                    <?php else : ?>
-                    <p class="">Fecha De Eliminacion:
-                        <?=$listUsers['DELETED_AT']?>
-                    </p>
-                    <?php endif;?>
-                </div>
-                <!-- Botón de eliminar -->
-                <?php if($listUsers['ACTIVE'] == 1) : ?>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal13" type="submit"
-                    data-id="<?=$listUsers['USER_ID']?>" class="btn btn-danger">Eliminar Cuenta</a>
-                <?php else : ?>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal12" type="submit"
-                    data-id="<?=$listUsers['USER_ID']?>" class="btn btn-secondary">Recuperar Cuenta</a>
-                <?php endif;?>
+        <div class="text-center">
+            <h2>Lista de usuarios</h2>
+            <br>
+            <div class="m-5 d-flex flex-column align-items-center">
+                <?php foreach($list as $listUsers) : ?>
+                    <div class="d-flex justify-content-between align-items-center p-2 border rounded mb-5 user-card">
+                        <!-- Imagen del usuario (más grande) -->
+                        <img src="resources/imagesUsers/<?=$listUsers['IMAGE']?>" alt="Foto de <?=$listUsers['NAME']?>" class="rounded-circle ms-5 user-image">
+                        
+                        <!-- Nombre y apellidos del usuario -->
+                        <div class="p-5 user-info">
+                            <h4 class=""><?=$listUsers['NAME']?></h4>
+                            <h4 class=""><?=$listUsers['SURNAME']?></h4>
+                            <?php if($listUsers['HIGUER_SURNAME'] == NULL) : ?>
+                                <?php if($listUsers['FOUNDER'] == 1) : ?>
+                                    <h5>Usuario fundador Nivel 1</h5>
+                                <?php else : ?>
+                                    <h5>Usuario externo</h5>
+                                <?php endif; ?>
+                            <?php else : ?>
+                                <h5>Nivel: <?=$listUsers['LEVEL_USER']?></h5>
+                                <h5>Usuario Superior:</h5>
+                                <h5><?=$listUsers['HIGHER_NAME']?> <?=$listUsers['HIGUER_SURNAME']?></h5>    
+                            <?php endif; ?>
+                            <p class="">Fecha De Union: <?=$listUsers['CREATED_AT']?></p>
+                        </div>
+                        
+                        <!-- Botón de eliminar -->
+                        <?php if($listUsers['ACTIVE'] == 1) : ?>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3" type="submit"
+                            data-id="<?=$listUsers['USER_ID']?>" class="btn btn-danger delete-button">Eliminar Cuenta</a>
+                        <?php else : ?>
+                            <h6>Cuenta Eliminada</h6>
+                        <?php endif;?>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
-    </div>
-    <?php endif; ?>
+    <?php endif; ?>    
 </div>

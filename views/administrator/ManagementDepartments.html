@@ -1,116 +1,66 @@
-<?php if(isset($_SESSION['erroractualizar'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['erroractualizar']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<?php
+$alerts = [
+    'erroractualizar' => 'danger',
+    'aciertoactualizar' => 'success',
+    'erroreliminar' => 'danger',
+    'aciertoeliminar' => 'success',
+    'aciertoregistro' => 'success',
+    'errorventana' => 'danger'
+];
+
+foreach ($alerts as $key => $type) :
+    if (isset($_SESSION[$key])) : ?>
+        <div id="alerta2" class="position-absolute col-6">
+            <div>
+                <div class="alert alert-<?= $type ?> alert-dismissible fade show" role="alert">
+                    <strong>Informacion: </strong>
+                    <?= $_SESSION[$key] ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('erroractualizar'); ?>
-<?php if(isset($_SESSION['aciertoactualizar'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['aciertoactualizar']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('aciertoactualizar'); ?>
-<?php if(isset($_SESSION['erroreliminar'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['erroreliminar']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('erroreliminar'); ?>
-<?php if(isset($_SESSION['aciertoeliminar'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['aciertoeliminar']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('aciertoeliminar'); ?>
-<?php if(isset($_SESSION['aciertoregistro'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['aciertoregistro']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('aciertoregistro'); ?>
-<?php if(isset($_SESSION['errorventana'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['errorventana']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('errorventana'); ?>
+        <?php helps::deleteSession($key); ?>
+    <?php endif;
+endforeach;
+?>
+
 <div class="col-10 m-5">
     <?php if(sizeof($list) == 0) : ?>
-    <h1 class="text-center mt-5 mb-5">No hay departamentos creados</h1>
+        <h1 class="text-center mt-5 mb-5">No hay departamentos creados</h1>
     <?php else : ?>
-    <h2 class="text-center">Lista de departamentos</h2>
-    <br>
-    <br>
-    <table class="table table-striped table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>
-                    <div class="text-center">Nombre</div>
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($list as $listDepartments) : ?>
-            <tr>
-                <td>
-                    <div class="text-center">
-                        <?=$listDepartments['NAME']?>
-                    </div>
-                </td>
-                <td>
-                    <div class="d-flex justify-content-center">
-                        <a href="<?=init?><?=department?><?=windowUpdateDepartment?>&id=<?=$listDepartments['DEPARTMENT_ID']?>"
-                            class="btn btn-warning">Actualizar</a>
-                    </div>
-                </td>
-                <td>
-                    <div class="d-flex justify-content-center">
-                        <a data-bs-toggle="modal" data-bs-target="#exampleModal6" class="btn btn-danger"
-                            data-id="<?=$listDepartments['DEPARTMENT_ID']?>" href="#">Eliminar</a>
-                    </div>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        <h2 class="text-center">Lista de departamentos</h2>
+        <br>
+        <br>
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>
+                        <div class="text-center">Nombre</div>
+                    </th>
+                    <th></th>
+                    <th></th>                            
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($list as $listDepartments) : ?>
+                    <tr>
+                        <td>
+                            <div class="text-center"><?=$listDepartments['NAME']?></div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a href="<?=init?><?=department?><?=windowUpdateDepartment?>&id=<?=$listDepartments['DEPARTMENT_ID']?>" class="btn btn-warning">Actualizar</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <a data-bs-toggle="modal" data-bs-target="#exampleModal6" class="btn btn-danger" data-id="<?=$listDepartments['DEPARTMENT_ID']?>" href="#">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     <?php endif; ?>
     <br>
     <!-- Modal -->
