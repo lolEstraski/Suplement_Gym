@@ -1,6 +1,6 @@
 <!-- Mostrar alerta mejorada si hay un error al actualizar -->
 <?php if (isset($_SESSION['erroractualizar'])) : ?>
-    <div class="alerta-custom position-fixed top-0 start-50 translate-middle-x col-6 mt-3">
+    <div class="alerta-custom position-fixed top-0 start-50 translate-middle-x col-10 col-md-6 mt-3">
         <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
             <strong>Información: </strong> <?= $_SESSION['erroractualizar'] ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -13,21 +13,21 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
             <h2 class="text-center mb-4">Actualizar Dirección</h2>
-            <form action="<?= init . direction . updateDirection ?>&id=<?= $direction['DIRECTION_ID'] ?>" method="post" enctype="multipart/form-data" class="p-4 bg-light rounded shadow">
+            <form action="<?= init . direction . updateDirection ?>&id=<?= $direction['DIRECTION_ID'] ?>" method="post" enctype="multipart/form-data" class="p-4 bg-light rounded shadow-lg">
                 <div class="form-group mb-3">
-                    <label for="carrer">Carrera <i class="bi bi-signpost ms-1"></i></label>
+                    <label for="carrer">Carrera <i class="fas fa-road ms-1"></i></label>
                     <input type="text" name="carrer" value="<?= $direction['CARRER'] ?>" class="form-control" placeholder="Ingrese la carrera" required>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="street">Calle <i class="bi bi-signpost-2 ms-1"></i></label>
+                    <label for="street">Calle <i class="fas fa-road ms-1"></i></label>
                     <input type="number" name="street" value="<?= $direction['STREET'] ?>" class="form-control" placeholder="Ingrese la calle" required>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="postal_code">Código Postal <i class="bi bi-mailbox ms-1"></i></label>
+                    <label for="postal_code">Código Postal <i class="fas fa-envelope ms-1"></i></label>
                     <input type="number" name="postal_code" value="<?= $direction['POSTAL_CODE'] ?>" class="form-control" placeholder="Ingrese el código postal" required>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="direction">Dirección <i class="bi bi-map ms-1"></i></label>
+                    <label for="direction">Dirección <i class="fas fa-map-marker-alt ms-1"></i></label>
                     <input type="text" name="direction" value="<?= $direction['DIRECTION'] ?>" class="form-control" placeholder="Ingrese la dirección completa" required>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
@@ -36,7 +36,7 @@
             </form>
         </div>
         <div class="col-12 col-md-3 text-center mt-4 mt-md-0">
-            <img id="imgRegister" class="img-fluid rounded-circle shadow-sm" src="assets/images/logos/Map.png" alt="Mapa">
+            <img id="imgRegister" class="img-fluid rounded-circle shadow-sm" src="assets/images/logos/MAP.jpeg" alt="Mapa">
         </div>
     </div>
 </div>
@@ -48,14 +48,28 @@
     }
     form {
         border-radius: 8px;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     .form-control {
         border-radius: 6px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.3s;
+    }
+    .form-control:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
     }
     .btn-success {
         border-radius: 6px;
+        background: linear-gradient(135deg,#285ec7, #285ec7);
+        border: none;
+        transition: background 0.3s;
     }
-    .bi {
+    .btn-success:hover {
+        background: linear-gradient(135deg,#285ec7, #285ec7);
+    }
+    .fas {
         font-size: 1.2rem;
     }
 </style>

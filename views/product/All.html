@@ -1,28 +1,25 @@
 <div class="container mt-5 mb-5">
-    <h1 class="text-center mt-5 mb-5">Todos los productos</h1>
-    <div class="row g-4">
-        <?php foreach($listProducts as $list) : ?>
-        <div class="col-md-3">
-            <div class="card mx-auto h-100">
-                <img class="card-img-top img-fluid" src="resources/imagesProducts/<?=$list['IMAGE']?>" alt=""
-                    height="200px">
-                <div class="card-body text-center">
-                    <h3 class="card-title"><?=$list['NAME']?></h3>
-                    <p class="card-text text-success"><?=$list['PRICE']?></p>
-                    <div class="d-flex justify-content-center gap-2">
-                        <?php if(isset($_SESSION['loginsuccess'])) : ?>
-                            <a href="<?=init?><?=transaction?><?=shop?>&id=<?=$list['PRODUCT_ID']?>" class="btn btn-success w-auto">
-                                Comprar Ahora
-                            </a>
-                        <?php endif; ?>
-                        <a href="<?=init?><?=product?><?=detailProduct?>&id=<?=$list['PRODUCT_ID']?>" class="btn btn-primary w-auto">
-                            Ver Detalle
-                        </a>
+    <div class="m-5">
+        <div class="row g-4">
+            <?php if (sizeof($listProducts) == 0) : ?>
+                <h1 class="text-center mt-5 mb-5">No hay productos con coincidencia</h1>
+            <?php else : ?>
+                <h1 class="text-center mt-5 mb-5">Resultado de la búsqueda</h1>
+                <?php foreach ($listProducts as $list) : ?>
+                    <div class="card w-25 mx-4 mb-5">
+                        <img class="card-img-top img-fluid" src="resources/imagesProducts/<?= $list['IMAGE'] ?>" alt="" width="5px" height="200px">
+                        <div class="card-body">
+                            <h3 class="card-title text-center"><?= $list['NAME'] ?></h3>
+                            <p class="card-text text-center text-success"><?= $list['PRICE'] ?></p>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <a href="<?= init ?><?= transaction ?><?= shop ?>&id=<?= $list['PRODUCT_ID'] ?>" class="btn btn-success">Comprar Ahora</a>
+                                <a href="<?= init ?><?= product ?><?= detailProduct ?>&id=<?= $list['PRODUCT_ID'] ?>" class="btn btn-primary">Ver Detalle</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
-        <?php endforeach; ?>
     </div>
     <br>
     <br>

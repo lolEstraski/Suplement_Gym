@@ -1,55 +1,62 @@
-<?php if(isset($_SESSION['aciertologout'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['aciertologout']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="container-fluid py-4">
+    <div class="row justify-content-center align-items-center" style="min-height: 85vh;">
+        <div class="col-md-5 col-lg-4 mb-4 mb-md-0">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <img src="assets/images/logos/logoT.png" alt="Logo" class="img-fluid" style="max-height: 100px;">
+                    </div>
+                    <h2 class="text-center mb-4" id="loginText">INICIO DE SESIÓN</h2>
+                    
+                    <?php if(isset($_SESSION['iniciarsesionerror']) || isset($_SESSION['logoutm'])) : ?>
+                        <div class="alert <?= isset($_SESSION['iniciarsesionerror']) ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show" role="alert">
+                            <strong><?= isset($_SESSION['iniciarsesionerror']) ? 'Error: ' : 'Información: ' ?></strong>
+                            <?= isset($_SESSION['iniciarsesionerror']) ? $_SESSION['iniciarsesionerror'] : $_SESSION['logoutm'] ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php 
+                        helps::deleteSession('iniciarsesionerror');
+                        helps::deleteSession('logoutm');
+                        ?>
+                    <?php endif; ?>
+
+                    <form action="<?=init?><?=user?><?=login?>" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Tu contraseña" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <p>O inicia sesión con</p>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <a href="#" class="btn btn-outline-danger"><i class="fab fa-google"></i> Google</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-lg-4 d-flex flex-column justify-content-center">
+            <img src="resources/imagesProducts/legacy.jpg" alt="Suplementos" class="img-fluid rounded shadow mb-3" style="max-height: 400px; object-fit: cover;">
+            <h2 class="text-center mb-2">Bienvenido a M MIPROTEINA</h2>
+            <p class="text-center">Obtén los mejores suplementos al mejor precio y emprende tu propio negocio.</p>
         </div>
     </div>
 </div>
-<?php endif; ?>
-<?php helps::deleteSession('aciertologout'); ?>
-<?php if(isset($_SESSION['erroriniciarsesion'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['erroriniciarsesion']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('erroriniciarsesion'); ?>
-<div class="row col-12 mt-5 mb-3 p-4">
-    <div class="col-6 mt-5 ms-5">
-        <h2 id="loginText" class="text-center">INICIO DE SESIÓN</h2>
-        <br>
-        <h2>Obtiene las mejores bebidas energeticas al mejor precio y emprende tu propio negocio</h2>
-    </div>
-    <div class="col-5 border ms-4">
-        <br>
-        <br>
-        <form action="<?=init?><?=user?><?=login?>" method="post">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" name="email" class="form-control" placeholder="Ingresa tu email" required>
-            </div>
-            <br>
-            <br>
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" name="password" class="form-control" placeholder="Ingresa tu contraseña"
-                    required>
-            </div>
-            <br>
-            <br>
-            <div class="d-flex justify-content-center">
-                <input type="submit" class="btn btn-primary" value="Ingresar">
-            </div>
-            <br>
-            <br>
-        </form>
-    </div>
-</div>
+
+<footer class="text-center mt-4">
+    <p>&copy; 2023 Suplement_Gym. Todos los derechos reservados.</p>
+    <a href="#" class="text-decoration-none">Política de privacidad</a> | 
+    <a href="#" class="text-decoration-none">Términos de servicio</a>
+</footer>
