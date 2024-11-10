@@ -417,7 +417,7 @@
                         /*Crear sesion de inicio de sesion exitoso*/
                         $_SESSION['loginsuccesa'] = 'Admin logueado';
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Helps::createSessionAndRedirect("aciertoiniciarsesion", "Bienvenido a EduardEnergyDrinks", "?controller=administratorController&action=home");
+                        Helps::createSessionAndRedirect("aciertoiniciarsesion", "Bienvenido a Suplement_Gym", "?controller=administratorController&action=home");
                     /*De lo contrario*/
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/

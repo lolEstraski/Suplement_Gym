@@ -6,7 +6,7 @@
 
     /*Ruta de alojamiento local*/
 
-    define("init", "http://localhost/EduardEnergyDrinks");
+    define("init", "http://localhost/Suplement_Gym");
 
     /*Ruta para usuario*/
 

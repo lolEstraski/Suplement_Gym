@@ -17,7 +17,7 @@
             /*Crear sesion*/
             $_SESSION[$nombreSesion] = $contenidoSesion;
             /*Redirigir*/
-            header("Location:"."http://localhost/EduardEnergyDrinks/".$ruta);
+            header("Location:"."http://localhost/Suplement_Gym/".$ruta);
         }
 
         /*Funcion para eliminar sesiones*/

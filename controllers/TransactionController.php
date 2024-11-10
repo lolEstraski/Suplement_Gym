@@ -106,7 +106,7 @@
                     /*Si el resultado es correcto*/
                     if($resultado){
                         /*Redirigir*/
-                        header("Location:"."http://localhost/EduardEnergyDrinks/?controller=transactionController&action=windowCar");
+                        header("Location:"."http://localhost/Suplement_Gym/?controller=transactionController&action=windowCar");
                     /*De lo contrario*/
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
@@ -139,7 +139,7 @@
                     /*Si el resultado es correcto*/
                     if($resultado){
                         /*Redirigir*/
-                        header("Location:"."http://localhost/EduardEnergyDrinks/?controller=transactionController&action=windowCar");
+                        header("Location:"."http://localhost/Suplement_Gym/?controller=transactionController&action=windowCar");
                     /*De lo contrario*/
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
@@ -408,7 +408,7 @@
                                     /*Eliminar carrito*/
                                     $model -> deleteCar($_SESSION['loginsucces']['USER_ID']);
                                     /*Redirigir*/
-                                    header("Location:"."http://localhost/EduardEnergyDrinks/?controller=productController&action=windowProducts");
+                                    header("Location:"."http://localhost/Suplement_Gym/?controller=productController&action=windowProducts");
                                 /*De lo contrario*/  
                                 }else{
                                     /*Crear la sesion y redirigir a la ruta pertinente*/
