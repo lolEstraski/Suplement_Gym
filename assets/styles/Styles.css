@@ -175,6 +175,8 @@ footer p {
 #imgRegister {
   width: 350px;
   height: 350px;
+  object-fit: cover;
+  border: 2px solid #337eff;
 }
 
 #imgNetwork {
@@ -468,3 +470,6 @@ body {
   max-width: 200px;
   text-align: left;
 }
+
+/* Add Font Awesome for better icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

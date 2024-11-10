@@ -1,93 +1,124 @@
-<?php if(isset($_SESSION['erroregistro'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['erroregistro']?>
+<!-- Mostrar alerta mejorada si hay error en el registro -->
+<?php if (isset($_SESSION['erroregistro'])) : ?>
+    <div class="alerta-custom position-fixed top-0 start-50 translate-middle-x col-6 mt-3">
+        <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+            <strong>Información: </strong> <?= $_SESSION['erroregistro'] ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
-</div>
 <?php endif; ?>
 <?php helps::deleteSession('erroregistro'); ?>
-<div class="col-12 p-5 m-1 row">
-    <h2 class="text-center">Formulario de registro</h2>
-    <br>
-    <br>
-    <form action="<?=init?><?=user?><?=registerUser?>" method="post" enctype="multipart/form-data">
-        <div class="col-12 row">
-            <div class="col-6 me-5">
-                <div class="form-group">
-                    <label for="nameu">Nombre</label>
-                    <input type="text" name="nameu" class="form-control" required>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Formulario de Registro</h2>
+    <form action="<?= init . user . registerUser ?>" method="post" enctype="multipart/form-data" class="p-4 bg-light rounded shadow">
+        <div class="row">
+            <div class="col-md-7">
+                <!-- Campo Nombre -->
+                <div class="form-group mb-3">
+                    <label for="nameu">Nombre <i class="fas fa-user ms-1"></i></label>
+                    <input type="text" name="nameu" class="form-control" placeholder="Ingrese su nombre" required>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="surname">Apellidos</label>
-                    <input type="text" name="surname" class="form-control" required>
+
+                <!-- Campo Apellidos -->
+                <div class="form-group mb-3">
+                    <label for="surname">Apellidos <i class="fas fa-users ms-1"></i></label>
+                    <input type="text" name="surname" class="form-control" placeholder="Ingrese sus apellidos" required>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="birthdate">Fecha de nacimiento</label>
-                    <input type="date" name="birthdate" class="form-control" required>
+
+                <!-- Campo Fecha de Nacimiento -->
+                <div class="form-group mb-3">
+                    <label for="birthdate">Fecha de Nacimiento <i class="fas fa-calendar-alt ms-1"></i></label>
+                    <input type="text" id="birthdate" name="birthdate" class="form-control" placeholder="Seleccione su fecha de nacimiento" required>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="genre">Genero</label>
-                    <select name="genre" name="genre" class="form-control" required>
-                        <?php foreach($listGenres as $genres) : ?>
-                        <option value="<?=$genres['GENRE_ID']?>">
-                            <?=$genres['NAME']?>
-                        </option>
+
+                <!-- Campo Género -->
+                <div class="form-group mb-3">
+                    <label for="genre">Género <i class="fas fa-venus-mars ms-1"></i></label>
+                    <select name="genre" class="form-control" required>
+                        <?php foreach ($listGenres as $genres) : ?>
+                            <option value="<?= $genres['GENRE_ID'] ?>"><?= $genres['NAME'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <br>
-                <div class="form-group">
-                    <label for="phone">Teléfono</label>
-                    <input type="number" name="phone" class="form-control" required>
+
+                <!-- Campo Teléfono -->
+                <div class="form-group mb-3">
+                    <label for="phone">Teléfono <i class="fas fa-phone ms-1"></i></label>
+                    <input type="number" name="phone" class="form-control" placeholder="Ingrese su número de teléfono" required>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-10">
-                        <div class="form-group">
-                            <label for="email">Correo</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-2 d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="El correo debe ser unico">
-                            &#8505;
-                        </button>
-                    </div>
+
+                <!-- Campo Correo -->
+                <div class="form-group mb-3 position-relative">
+                    <label for="email">Correo <i class="fas fa-envelope ms-1"></i></label>
+                    <input type="email" name="email" class="form-control" placeholder="Ingrese su correo electrónico" required>
+                    <small class="form-text text-muted position-absolute end-0 me-4">Debe ser único</small>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-10">
-                        <div class="form-group">
-                            <label for="password">Clave</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="col-2 d-flex align-items-center justify-content-center">
-                        <button type="button" class="btn btn-tool" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="La clave debe contener una letra mayuscula, minuscula, numero, caracter especial y minimo 6 caracteres">
-                            &#8505;
-                        </button>
-                    </div>
+
+                <!-- Campo Clave -->
+                <div class="form-group mb-3 position-relative">
+                    <label for="password">Clave <i class="fas fa-key ms-1"></i></label>
+                    <input type="password" name="password" class="form-control" placeholder="Ingrese su clave" required>
+                    <small class="form-text text-muted position-absolute end-0 me-4">Mínimo 6 caracteres</small>
                 </div>
             </div>
-            <div class="col-4">
-                <img id="imgRegister" class="d-block" src="assets/images/logos/user.png" alt="">
-                <br>
-                <label for="formFile" class="form-label">Subir foto de perfil</label>
-                <input class="form-control" id="formFile" type="file" name="image" accept="image/*" required>
+
+            <!-- Sección para subir foto de perfil -->
+            <div class="col-md-4 text-center mt-4 mt-md-0">
+                <img id="imgRegister" class="img-fluid rounded-circle shadow-sm mb-3" src="assets/images/logos/Usuario.png" alt="Usuario">
+                <div class="form-group mb-3">
+                    <label for="formFile" class="form-label">Subir Foto de Perfil</label>
+                    <input class="form-control" id="formFile" type="file" name="image" accept="image/*" required onchange="previewImage(event)">
+                </div>
             </div>
         </div>
-        <br>
-        <div class="d-flex justify-content-center">
-            <input type="submit" class="btn btn-success" value="Registrar">
+
+        <!-- Botón de Registro -->
+        <div class="d-flex justify-content-center mt-4">
+            <button type="submit" class="btn btn-success w-50">Registrar</button>
         </div>
     </form>
 </div>
+
+<!-- Estilos personalizados para mejorar la apariencia -->
+<style>
+    .alerta-custom {
+        z-index: 1050;
+    }
+    form {
+        border-radius: 10px;
+    }
+    .form-control {
+        border-radius: 8px;
+    }
+    .btn-success {
+        border-radius: 8px;
+    }
+    .fas {
+        font-size: 1.2rem;
+    }
+</style>
+
+<!-- Script para previsualizar la imagen y el datepicker -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#birthdate", {
+            dateFormat: "Y-m-d",
+            maxDate: "today",
+            altInput: true,
+            altFormat: "F j, Y"
+        });
+    });
+
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById('imgRegister');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
