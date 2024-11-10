@@ -3,8 +3,7 @@
     <br>
     <br>
     <br>
-    <form action="<?=init?><?=direction?><?=updatePay?>&id=<?=$pay['PAY_ID']?>" method="post"
-        enctype="multipart/form-data">
+    <form action="<?=init?><?=direction?><?=updatePay?>&id=<?=$pay['PAY_ID']?>" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-7">
                 <br>
@@ -18,14 +17,14 @@
                         </div>
                         <select name="bankingEntity" name="bankingEntity" class="form-control" required>
                             <?php foreach($listBankEntity as $bankingEntity) : ?>
-                            <option value="<?=$bankingEntity['BANKING_ENTITY_ID']?>"
-                                <?=($pay['BANKING_ENTITY_NAME']==$bankingEntity['NAME']) ? 'selected' : '' ?>>
-                                <?=$bankingEntity['NAME']?>
-                            </option>
+                                <option value="<?=$bankingEntity['BANKING_ENTITY_ID']?>"
+                                    <?=($pay['BANKING_ENTITY_NAME'] == $bankingEntity['NAME']) ? 'selected' : '' ?>>
+                                    <?=$bankingEntity['NAME']?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                </div>
+                </div>     
                 <br>
                 <br>
                 <div class="form-group">
@@ -35,8 +34,7 @@
                                 Numero
                             </span>
                         </div>
-                        <input type="number" name="number_election" value="<?=$pay['NUMBER_ELECTION']?>"
-                            class="form-control" required>
+                        <input type="number" name="number_election" value="<?=$pay['NUMBER_ELECTION']?>" class="form-control" required>
                     </div>
                 </div>
                 <br>
@@ -51,7 +49,8 @@
             </div>
             <div class="col-3">
                 <div class="col-3"></div>
-                <img id="imgRegister" class="img-fluid" src="assets/images/logos/pago.png" alt="">
+                <img id="imgRegister" class="img-fluid"
+                    src="assets/images/logos/pago.png" alt="">
                 <br>
             </div>
         </div>

@@ -1,32 +1,30 @@
 <?php if(isset($_SESSION['errorregistro'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
+    <div id="alerta2" class="position-absolute col-6">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Informacion: </strong>
             <?=$_SESSION['errorregistro']?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
-</div>
 <?php endif; ?>
 <?php helps::deleteSession('errorregistro'); ?>
-<div class="col-12 p-5 m-1 row">
-    <div class="col-7 me-4">
-        <h2 class="text-center">Formulario de registro</h2>
-        <br>
-        <br>
-        <form action="<?=init?><?=bankEntity?><?=registerBankEntity?>" method="post">
-            <div class="form-group">
-                <label for="namebe">Nombre</label>
-                <input type="text" name="namebe" class="form-control" required>
-            </div>
-            <br>
-            <div class="d-flex justify-content-center">
-                <input type="submit" class="btn btn-success" value="Crear">
-            </div>
-        </form>
-    </div>
-    <div class="col-3">
-        <img id="gestionAdmin" class="d-block" src="assets/images/logos/entidad.png" alt="">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Formulario de registro</h2>
+            <form action="<?=init?><?=bankEntity?><?=registerBankEntity?>" method="post">
+                <div class="form-group mb-3">
+                    <label for="namebe" class="form-label">Nombre</label>
+                    <input type="text" name="namebe" class="form-control" required>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-primary" value="Crear">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 text-center">
+            <img id="gestionAdmin" class="img-fluid mt-4" src="assets/images/logos/entity.png" alt="">
+        </div>
     </div>
 </div>

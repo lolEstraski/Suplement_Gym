@@ -1,63 +1,73 @@
-<?php if(isset($_SESSION['errorregistro'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['errorregistro']?>
+<!-- Mostrar alerta mejorada si hay error en el registro -->
+<?php if (isset($_SESSION['errorregistro'])) : ?>
+    <div class="alerta-custom position-fixed top-0 start-50 translate-middle-x col-6 mt-3">
+        <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+            <strong>Información: </strong> <?= $_SESSION['errorregistro'] ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
-</div>
 <?php endif; ?>
 <?php helps::deleteSession('errorregistro'); ?>
-<div class="col-12 p-5 m-1 row">
-    <div class="col-7 me-4">
-        <h2 class="text-center">Formulario de registro</h2>
-        <br>
-        <br>
-        <form action="<?=init?><?=direction?><?=registerDirection?>" method="post">
-            <div class="form-group">
-                <label for="department">Departamento</label>
-                <select name="department" name="department" class="form-control" required>
-                    <?php foreach($listDepartments as $departments) : ?>
-                    <option value="<?=$departments['DEPARTMENT_ID']?>">
-                        <?=$departments['NAME']?>
-                    </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="city">Ciudad</label>
-                <input type="text" name="city" class="form-control" required>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="carrer">Carrera</label>
-                <input type="text" name="carrer" class="form-control" required>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="street">Calle</label>
-                <input type="text" name="street" class="form-control" required>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="postalCode">Codigo postal</label>
-                <input type="number" name="postalCode" class="form-control" required>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="direction">Direccion</label>
-                <textarea name="direction" class="form-control"></textarea>
-            </div>
-            <br>
-            <div class="d-flex justify-content-center">
-                <input type="submit" class="btn btn-success" value="Crear">
-            </div>
-        </form>
-    </div>
-    <div class="col-3">
-        <img id="imgRegister" class="d-block" src="assets/images/logos/mapa.png" alt="">
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <h2 class="text-center mb-4">Registro de Dirección</h2>
+            <form action="<?= init . direction . registerDirection ?>" method="post" class="p-4 bg-light rounded shadow">
+                <div class="form-group mb-3">
+                    <label for="department">Departamento <i class="bi bi-building ms-1"></i></label>
+                    <select name="department" class="form-control" required>
+                        <?php foreach ($listDepartments as $departments) : ?>
+                            <option value="<?= $departments['DEPARTMENT_ID'] ?>"><?= $departments['NAME'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="city">Ciudad <i class="bi bi-geo-alt ms-1"></i></label>
+                    <input type="text" name="city" class="form-control" placeholder="Ingrese la ciudad" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="carrer">Carrera <i class="bi bi-signpost ms-1"></i></label>
+                    <input type="text" name="carrer" class="form-control" placeholder="Ingrese la carrera" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="street">Calle <i class="bi bi-signpost-2 ms-1"></i></label>
+                    <input type="text" name="street" class="form-control" placeholder="Ingrese la calle" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="postalCode">Código Postal <i class="bi bi-mailbox ms-1"></i></label>
+                    <input type="number" name="postalCode" class="form-control" placeholder="Ingrese el código postal" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="direction">Dirección <i class="bi bi-map ms-1"></i></label>
+                    <textarea name="direction" class="form-control" rows="3" placeholder="Ingrese la dirección completa"></textarea>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success w-50">Crear</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 col-md-3 text-center mt-4 mt-md-0">
+            <img id="imgRegister" class="img-fluid rounded shadow-sm" src="assets/images/logos/Map.png" alt="Mapa">
+        </div>
     </div>
 </div>
+
+
+<style>
+    .alerta-custom {
+        z-index: 1050; /* Asegura que la alerta esté visible */
+    }
+    form {
+        border-radius: 8px;
+    }
+    .form-control {
+        border-radius: 6px;
+    }
+    .btn-success {
+        border-radius: 6px;
+    }
+    .bi {
+        font-size: 1.2rem;
+    }
+</style>

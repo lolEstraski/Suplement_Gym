@@ -1,50 +1,30 @@
 <?php if(isset($_SESSION['erroractualizar'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
+    <div id="alerta2" class="position-absolute col-6">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Informacion: </strong>
             <?=$_SESSION['erroractualizar']?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
-</div>
 <?php endif; ?>
 <?php helps::deleteSession('erroractualizar'); ?>
-<div class="col-12 p-5 m-1 row">
-    <h2 class="text-center">Actualizar</h2>
-    <br>
-    <br>
-    <br>
-    <form action="<?=init?><?=bankEntity?><?=updateBankEntity?>&id=<?=$bankEntity['BANKING_ENTITY_ID']?>" method="post">
-        <div class="row">
-            <div class="col-7">
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Nombre
-                            </span>
-                        </div>
-                        <input type="text" name="namebe" value="<?=$bankEntity['NAME']?>" class="form-control" required>
-                    </div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Actualizar</h2>
+            <form action="<?=init?><?=bankEntity?><?=updateBankEntity?>&id=<?=$bankEntity['BANKING_ENTITY_ID']?>" method="post">
+                <div class="form-group mb-3">
+                    <label for="namebe" class="form-label">Nombre</label>
+                    <input type="text" name="namebe" value="<?=$bankEntity['NAME']?>" class="form-control" required>
                 </div>
-                <br>
-                <br>
-                <div class="col-12 row">
-                    <div class="col-6">
-                        <div class="d-flex justify-content-center">
-                            <input type="submit" class="btn btn-success" value="Actualizar Datos">
-                        </div>
-                    </div>
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-primary" value="Actualizar Datos">
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="col-3"></div>
-                <img id="imgRegister" class="img-fluid" src="assets/images/logos/entidad" alt="">
-                <br>
-            </div>
+            </form>
         </div>
-    </form>
+        <div class="col-md-4 text-center">
+            <img id="imgRegister" class="img-fluid mt-4" src="assets/images/logos/entity" alt="">
+        </div>
+    </div>
 </div>

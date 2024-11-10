@@ -1,32 +1,31 @@
-<?php if(isset($_SESSION['errorregistro'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['errorregistro']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<?php if (isset($_SESSION['errorregistro'])) : ?>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error: </strong>
+                <?= $_SESSION['errorregistro'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         </div>
     </div>
-</div>
-<?php endif; ?>
-<?php helps::deleteSession('errorregistro'); ?>
-<div class="col-12 p-5 m-1 row">
-    <div class="col-7 me-4">
-        <h2 class="text-center">Formulario de registro</h2>
-        <br>
-        <br>
-        <form action="<?=init?><?=department?><?=registerDepartment?>" method="post">
-            <div class="form-group">
-                <label for="namede">Nombre</label>
-                <input type="text" name="namede" class="form-control" required>
-            </div>
-            <br>
-            <div class="d-flex justify-content-center">
-                <input type="submit" class="btn btn-success" value="Crear">
-            </div>
-        </form>
-    </div>
-    <div class="col-3">
-        <img id="gestionAdmin" class="d-block" src="assets/images/logos/departamento.png" alt="">
+<?php helps::deleteSession('errorregistro'); endif; ?>
+
+<div class="container mt-5">
+    <div class="row p-4 justify-content-center">
+        <div class="col-md-7 me-4 bg-light rounded shadow-sm p-4">
+            <h2 class="text-center text-black">Formulario de Registro</h2>
+            <form action="<?= init ?><?= department ?><?= registerDepartment ?>" method="post">
+                <div class="form-group mb-3">
+                    <label for="namede" class="form-label">Nombre del Departamento</label>
+                    <input type="text" name="namede" id="namede" class="form-control" placeholder="Ingrese el nombre" required>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5">Crear</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <img id="imgRegister" src="assets/images/logos/DEPARTMENT.png" alt="Imagen de Registro" class="img-fluid rounded shadow-sm">
+        </div>
     </div>
 </div>

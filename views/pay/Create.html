@@ -1,15 +1,16 @@
 <?php if(isset($_SESSION['errorregistro'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['errorregistro']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div id="alerta2" class="position-absolute col-6">
+        <div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Informacion: </strong>
+                <?=$_SESSION['errorregistro']?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         </div>
     </div>
-</div>
 <?php endif; ?>
 <?php helps::deleteSession('errorregistro'); ?>
+
 <div class="col-12 p-5 m-1 row">
     <div class="col-7 me-4">
         <h2 class="text-center">Formulario de registro</h2>
@@ -20,9 +21,7 @@
                 <label for="entity">Entidad Bancaria</label>
                 <select name="entity" name="entity" class="form-control" required>
                     <?php foreach($listBankEntities as $banksEntities) : ?>
-                    <option value="<?=$banksEntities['BANKING_ENTITY_ID']?>">
-                        <?=$banksEntities['NAME']?>
-                    </option>
+                        <option value="<?=$banksEntities['BANKING_ENTITY_ID']?>"><?=$banksEntities['NAME']?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

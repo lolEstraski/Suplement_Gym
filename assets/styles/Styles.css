@@ -455,3 +455,16 @@ footer p {
   background-color: #285ec7;
   transform: translateY(-2px);
 }
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+.tooltip-inner {
+  max-width: 200px;
+  text-align: left;
+}

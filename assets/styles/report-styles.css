@@ -1,0 +1,17 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.tooltip-inner {
+    max-width: 200px;
+    text-align: left;
+}
+
+#gestionesAdmin {
+    max-width: 600px;
+    margin: 0 auto;
+}

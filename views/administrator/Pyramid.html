@@ -1,29 +1,32 @@
-<?php if($niveles == null) : ?>
-    <div class="m-5">
-        <h1 class="p-5 text-center">No hay usuarios dentro de la red</h1>
-    </div>
-<?php else: ?>
-    <div class="m-5">
-        <div class="container">
-            <h2 class="text-center mt-4">Jerarquía de Usuarios</h2>
-            <br>
-            <?php
-            /*Generar el HTML dinámicamente para cada nivel*/
-            foreach ($niveles as $nivel => $usuarios) {
-                echo "<div class='pyramid-level pyramid-level-{$nivel}'>";
-                foreach ($usuarios as $usuario) {
-                    echo "
-                        <div class='pyramid-item'>
-                            <i class='bi bi-person-circle'></i>
-                            <strong>{$usuario['NAME']}</strong><br>
-                            <span>Nivel {$nivel}</span>
-                        </div>
-                    ";
-                }
-                echo "</div>";
+<div class="m-5">
+    <div class="container">
+        <h2 class="text-center mt-4">Jerarquía de Usuarios</h2>
+        <br>
+        <?php
+        // Crear un arreglo para organizar los usuarios por nivel
+        $niveles = [];
+        foreach ($pyramid as $usuario) {
+            $nivel = $usuario['HIERARCHY_LEVEL'];
+            $niveles[$nivel][] = $usuario;
+        }
+
+        // Generar el HTML dinámicamente para cada nivel
+        foreach ($niveles as $nivel => $usuarios) {
+            echo "<div class='card mb-4'>";
+            echo "<div class='card-header'>Nivel {$nivel}</div>";
+            echo "<div class='card-body'>";
+            foreach ($usuarios as $usuario) {
+                echo "
+                    <div class='pyramid-item mb-2'>
+                        <i class='bi bi-person-circle'></i>
+                        <strong>{$usuario['NAME']}</strong><br>
+                    </div>
+                ";
             }
-            ?>
-            <br>
-        </div>
+            echo "</div>";
+            echo "</div>";
+        }
+        ?>
+        <br>
     </div>
-<?php endif; ?>
+</div>

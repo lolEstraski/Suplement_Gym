@@ -1,122 +1,61 @@
-<?php if(isset($_SESSION['erroractualizar'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['erroractualizar']?>
+<!-- Mostrar alerta mejorada si hay un error al actualizar -->
+<?php if (isset($_SESSION['erroractualizar'])) : ?>
+    <div class="alerta-custom position-fixed top-0 start-50 translate-middle-x col-6 mt-3">
+        <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+            <strong>Información: </strong> <?= $_SESSION['erroractualizar'] ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
-</div>
 <?php endif; ?>
 <?php helps::deleteSession('erroractualizar'); ?>
-<div class="col-12 p-5 m-1 row">
-    <h2 class="text-center">Actualizar</h2>
-    <br>
-    <br>
-    <br>
-    <form action="<?=init?><?=direction?><?=updateDirection?>&id=<?=$direction['DIRECTION_ID']?>" method="post"
-        enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-7">
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Departamento
-                            </span>
-                        </div>
-                        <select name="department" name="department" class="form-control" required>
-                            <?php foreach($listDepartments as $departments) : ?>
-                            <option value="<?=$departments['DEPARTMENT_ID']?>"
-                                <?=($direction['DEPARTMENT_NAME']==$departments['NAME']) ? 'selected' : '' ?>>
-                                <?=$departments['NAME']?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <h2 class="text-center mb-4">Actualizar Dirección</h2>
+            <form action="<?= init . direction . updateDirection ?>&id=<?= $direction['DIRECTION_ID'] ?>" method="post" enctype="multipart/form-data" class="p-4 bg-light rounded shadow">
+                <div class="form-group mb-3">
+                    <label for="carrer">Carrera <i class="bi bi-signpost ms-1"></i></label>
+                    <input type="text" name="carrer" value="<?= $direction['CARRER'] ?>" class="form-control" placeholder="Ingrese la carrera" required>
                 </div>
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Ciudad
-                            </span>
-                        </div>
-                        <input type="text" name="city" value="<?=$direction['CITY']?>" class="form-control" required>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="street">Calle <i class="bi bi-signpost-2 ms-1"></i></label>
+                    <input type="number" name="street" value="<?= $direction['STREET'] ?>" class="form-control" placeholder="Ingrese la calle" required>
                 </div>
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Carrera
-                            </span>
-                        </div>
-                        <input type="text" name="carrer" value="<?=$direction['CARRER']?>" class="form-control"
-                            required>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="postal_code">Código Postal <i class="bi bi-mailbox ms-1"></i></label>
+                    <input type="number" name="postal_code" value="<?= $direction['POSTAL_CODE'] ?>" class="form-control" placeholder="Ingrese el código postal" required>
                 </div>
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Calle
-                            </span>
-                        </div>
-                        <input type="number" name="street" value="<?=$direction['STREET']?>" class="form-control"
-                            required>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="direction">Dirección <i class="bi bi-map ms-1"></i></label>
+                    <input type="text" name="direction" value="<?= $direction['DIRECTION'] ?>" class="form-control" placeholder="Ingrese la dirección completa" required>
                 </div>
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Codigo Postal
-                            </span>
-                        </div>
-                        <input type="number" name="postal_code" value="<?=$direction['POSTAL_CODE']?>"
-                            class="form-control" required>
-                    </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success w-50">Actualizar Datos</button>
                 </div>
-                <br>
-                <br>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text rounded-0">
-                                Direccion
-                            </span>
-                        </div>
-                        <input type="text" name="direction" value="<?=$direction['DIRECTION']?>" class="form-control"
-                            required>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <div class="col-12 row">
-                    <div class="col-6">
-                        <div class="d-flex justify-content-center">
-                            <input type="submit" class="btn btn-success" value="Actualizar Datos">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="col-3"></div>
-                <img id="imgRegister" class="img-fluid" src="assets/images/logos/mapa.png" alt="">
-                <br>
-            </div>
+            </form>
         </div>
-    </form>
+        <div class="col-12 col-md-3 text-center mt-4 mt-md-0">
+            <img id="imgRegister" class="img-fluid rounded-circle shadow-sm" src="assets/images/logos/Map.png" alt="Mapa">
+        </div>
+    </div>
 </div>
+
+
+<style>
+    .alerta-custom {
+        z-index: 1050; /* Asegura que la alerta esté visible sobre otros elementos */
+    }
+    form {
+        border-radius: 8px;
+    }
+    .form-control {
+        border-radius: 6px;
+    }
+    .btn-success {
+        border-radius: 6px;
+    }
+    .bi {
+        font-size: 1.2rem;
+    }
+</style>
