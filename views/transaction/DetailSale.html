@@ -1,157 +1,181 @@
-<?php if(isset($_SESSION['errorcambio'])) : ?>
-<div id="alerta2" class="position-absolute col-6">
-    <div>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Informacion: </strong>
-            <?=$_SESSION['errorcambio']?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<style>
+    .invoice-header {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .invoice-header img {
+        max-height: 80px;
+    }
+    .invoice-header h2 {
+        font-size: 1.75rem;
+        margin-bottom: 0;
+    }
+    .invoice-header p {
+        margin-bottom: 0.25rem;
+    }
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    .table th, .table td {
+        vertical-align: middle;
+    }
+    .table th {
+        background-color: #e9ecef;
+    }
+    .total-summary {
+        font-size: 1.25rem;
+    }
+    .total-summary .text-danger {
+        font-size: 1rem;
+    }
+    .btn-lg {
+        font-size: 1.25rem;
+    }
+    .modal-header {
+        border-bottom: none;
+    }
+    .modal-footer {
+        border-top: none;
+    }
+</style>
+
+<div class="container py-5">
+    <!-- Encabezado de Factura -->
+    <div class="card shadow-lg border-0 mb-4">
+        <div class="card-body invoice-header">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="assets/images/logos/logoT.png" alt="Logo" class="img-fluid">
+                </div>
+                <div class="col-md-6 text-md-end">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <p class="mb-1"><strong>Entidad Bancaria:</strong></p>
+                                    <p class="text-muted"><?= isset($pay['BANKING_ENTITY_NAME']) ? $pay['BANKING_ENTITY_NAME'] : 'N/A' ?></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="mb-1"><strong>Número de Referencia:</strong></p>
+                                    <p class="text-muted"><?= isset($pay['NUMBER_ELECTION']) ? $pay['NUMBER_ELECTION'] : 'N/A' ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalle de Productos -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Detalle de Productos</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center">Vendedor</th>
+                                    <th class="text-center">Producto</th>
+                                    <th class="text-center">Contenido</th>
+                                    <th class="text-center">Unidades</th>
+                                    <th class="text-end">Precio Unit.</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(isset($list) && is_array($list)) : ?>
+                                <?php foreach($list as $listCar) : ?>
+                                <tr>
+                                    <td class="text-center"><?= $listCar['NAME_SELLER'] ?> <?= $listCar['SURNAME'] ?></td>
+                                    <td class="text-center"><?= $listCar['NAME_PRODUCT'] ?></td>
+                                    <td class="text-center"><?= $listCar['CONTENT'] ?></td>
+                                    <td class="text-center"><?= $listCar['AMOUNT'] ?></td>
+                                    <td class="text-end"><?='$'.number_format($listCar['PRICE'], 0, ',') ?></td>
+                                    <td class="text-end"><?='$'.number_format($listCar['PRICE'] * $listCar['AMOUNT'], 0, ',') ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <?php else : ?>
+                                <tr>
+                                    <td colspan="6" class="text-center">No hay productos en el carrito</td>
+                                </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen de Totales -->
+            <div class="row justify-content-end">
+                <div class="col-md-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Subtotal:</span>
+                                <strong><?='$'.number_format(isset($total) ? $total : 0, 0, ',') ?></strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 text-danger">
+                                <span>Descuento:</span>
+                                <strong><?='$'.number_format(isset($descuento) ? $descuento : 0, 0, ',') ?></strong>
+                            </div>
+                            <div class="d-flex justify-content-between border-top pt-3">
+                                <h5 class="mb-0">Total a Pagar:</h5>
+                                <h5 class="mb-0 text-success"><?='$'.number_format((isset($total) ? $total : 0) - (isset($descuento) ? $descuento : 0), 0, ',') ?></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de Compra -->
+            <div class="text-center mt-4">
+                <form id="purchaseForm" action="<?= init ?><?= transaction ?><?= purchase ?>" method="post">
+                    <input type="hidden" name="id_direction" value="<?= $idDirection ?>">
+                    <input type="hidden" name="id_pay" value="<?= $idPay ?>">
+                    <input type="hidden" name="total" value="<?= ($total - $descuento)?>">
+                    <input type="hidden" name="descuento" value="<?= $descuento?>">
+                    <button type="button" class="btn btn-primary btn-lg px-5" id="openModalBtn">
+                        <i class="fas fa-shopping-cart me-2"></i>Confirmar Compra
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Términos y Condiciones -->
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <small class="text-muted">
+                <p class="mb-1">Términos y Condiciones:</p>
+                <ul class="mb-0">
+                    <li>Los precios incluyen IVA</li>
+                    <li>Garantía válida por 30 días después de la compra</li>
+                    <li>Para devoluciones consulte nuestra política de retornos</li>
+                </ul>
+            </small>
         </div>
     </div>
 </div>
-<?php endif; ?>
-<?php helps::deleteSession('errorcambio'); ?>
-<div class="container mt-5 mx-2">
-    <!-- Encabezado -->
-    <div class="text-center mb-5">
-        <h2>Factura</h2>
-        <p class="text-muted">Fecha:
-            <?= date('d-m-Y') ?>
-        </p>
-    </div>
-    <!-- Datos del comprador -->
-    <h4 class="mb-3">Datos del Comprador</h4>
-    <div class="row mb-4">
-        <?php if($detail[0]['USER_NAME'] == NULL) : ?>
-        <div class="col-md-4">
-            <p><strong>Nombre: Tienda</p>
-        </div>
-        <?php else : ?>
-        <div class="col-md-4">
-            <p><strong>Nombre:</strong>
-                <?= $detail[0]['USER_NAME'] ?>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Apellidos:</strong>
-                <?= $detail[0]['SURNAME'] ?>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Email:</strong>
-                <?= $detail[0]['EMAIL'] ?>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Telefono:</strong>
-                <?= $detail[0]['PHONE'] ?>
-            </p>
-        </div>
-        <?php endif; ?>
-    </div>
-    <!-- Datos del envío -->
-    <h4 class="mb-3">Datos del Envío</h4>
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <p><strong>Ciudad:</strong>
-                <?= $detail[0]['CITY'] ?>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Carrera:</strong>
-                <?= $detail[0]['CARRER'] ?>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Calle:</strong>
-                <?= $detail[0]['STREET'] ?>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p><strong>Código Postal:</strong>
-                <?= $detail[0]['POSTAL_CODE'] ?>
-            </p>
+
+<!-- Modal de Confirmación -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="infoModalLabel">
+                    <i class="fas fa-check-circle me-2"></i>Compra Exitosa
+                </h5>
+            </div>
+            <div class="modal-body text-center py-4">
+                <i class="fas fa-shopping-cart fa-3x text-success mb-3"></i>
+                <p class="mb-0">La compra se ha realizado exitosamente</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-success px-4" id="confirmPurchase">
+                    <i class="fas fa-check me-2"></i>Confirmar
+                </button>
+            </div>
         </div>
     </div>
-    <!-- Datos del pago -->
-    <h4 class="mb-3">Datos del Pago</h4>
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <p><strong>Entidad Bancaria:</strong>
-                <?= $detail[0]['BANK_ENTITY_NAME'] ?>
-            </p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Número de elección:</strong>
-                <?= $detail[0]['NUMBER_ELECTION'] ?>
-            </p>
-        </div>
-    </div>
-    <br>
-    <!-- Botón Cambiar Estado -->
-    <div class="row mt-3">
-        <div class="col text-start">
-            <form action="<?=init?><?=transaction?><?=changeStatus?>&id=<?=$detail[0]['TRPR_ID']?>" method="POST"
-                class="d-inline">
-                <select name="purchaseStatus" class="form-select d-inline" style="width: auto;" required>
-                    <?php foreach($listPurchasingStatus as $purchasingStatus) : ?>
-                    <option value="<?=$purchasingStatus['PURCHASING_STATUS_ID']?>"
-                        <?=($detail[0]['NAME_PURCHASING_STATUS']==$purchasingStatus['NAME']) ? 'selected' : '' ?>>
-                        <?=$purchasingStatus['NAME']?>
-                    </option>
-                    <?php endforeach; ?>
-                </select>
-                <button type="submit" class="btn btn-primary">Cambiar estado</button>
-            </form>
-        </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <!-- Datos del producto -->
-    <h4 class="mb-3">Datos del Producto</h4>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Contenido</th>
-                <th>Unidades</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($detail as $listCar) : ?>
-            <tr>
-                <td>
-                    <?= $listCar['PRODUCT_NAME'] ?>
-                </td>
-                <td>
-                    <?='$'.number_format($listCar['PRICE'], 0, ','); ?>
-                </td>
-                <td>
-                    <?= $listCar['CONTENT'] ?>
-                </td>
-                <td>
-                    <?= $listCar['UNITS'] ?>
-                </td>
-            </tr>
-            <?php $total += ($listCar['PRICE'] * $listCar['UNITS'])?>
-            <?php endforeach; ?>
-            <?php $discount = $listCar['DISCOUNT']?>
-        </tbody>
-    </table>
-    <!-- Total -->
-    <div class="text-end mt-4">
-        <br>
-        <h3>Subtotal:
-            <?='$'.number_format($total, 0, ','); ?>
-        </h3>
-        <h3 class="text-danger">Descuento:
-            <?='$'.number_format($discount, 0, ','); ?>
-        </h3>
-        <h3 class="text-success">Total:
-            <?='$'.number_format(($total - $discount), 0, ','); ?>
-        </h3>
-    </div>
-    <br>
-    <br>
 </div>

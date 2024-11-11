@@ -1,144 +1,250 @@
-<div style="margin-top: 40px; margin-bottom: 40px;">
-    <img src="assets/images/logos/logotienda.png" style="width: 100px; height: 100px; margin-left: 315px;">
-    <br>
-    <br>
-    <h2 style="text-align: center;">Eduard Energy Drinks</h2>
-    <br>
-    <br>
-    <h4 style="text-align: center;">"Despierta el poder dentro de ti, recarga cada instante y alcanza el máximo
-        rendimiento con la energía que te impulsa a lograr lo imposible."</h4>
-    <br>
-    <br>
-    <p style="text-align: center;">Factura generada:
-        <?=Helps::today();?>
-    </p>
-    <br>
-    <br>
-    <h2 style="text-align: center; margin-bottom: 20px; font-weight: bold;">Detalle Compra</h2>
-    <br>
-    <!-- Datos del vendedor -->
-    <h4 style="margin-bottom: 20px;">Datos del Vendedor</h4>
-    <div style="width: 80%; margin: 0 auto; margin-bottom: 20px;">
-        <?php if($detail[0]['USER_NAME'] == NULL) : ?>
-        <div style="display: flex; justify-content: space-between;">
-            <div style="width: 30%;"><strong>Nombre:</strong>Tienda</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Factura Eduard Energy Drinks</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+        .card-title {
+            color: #2c3e50;
+        }
+        .text-muted {
+            color: #6c757d !important;
+        }
+        .table th {
+            font-weight: 600;
+            background-color: #f8f9fa;
+        }
+        .border-bottom {
+            border-bottom: 2px solid #e9ecef !important;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+        .modal-header {
+            border-bottom: none;
+        }
+        .modal-footer {
+            border-top: none;
+        }
+        .fas {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Encabezado de Factura -->
+        <div class="card shadow-lg border-0 mb-4">
+            <div class="card-body">
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-6">
+                        <img src="assets/images/logos/logoT.png" alt="Logo" class="img-fluid" style="max-height: 100px;">
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <h2 class="mb-1">FACTURA DE COMPRA</h2>
+                        <p class="text-muted mb-1">Fecha: <?=Helps::today();?></p>
+                        <p class="text-muted mb-0">No. Factura: INV-<?=rand(10000, 99999)?></p>
+                    </div>
+                </div>
+
+                <!-- Información de Vendedor -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title border-bottom pb-2">
+                                    <i class="fas fa-user me-2"></i>Datos del Vendedor
+                                </h5>
+                                <div class="row g-3">
+                                    <?php if($detail[0]['USER_NAME'] == NULL) : ?>
+                                        <div class="col-12">
+                                            <p class="mb-1"><strong>Nombre:</strong> Tienda</p>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="col-sm-6">
+                                            <p class="mb-1"><strong>Nombre:</strong></p>
+                                            <p class="text-muted"><?= $detail[0]['USER_NAME'] ?></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="mb-1"><strong>Apellidos:</strong></p>
+                                            <p class="text-muted"><?= $detail[0]['SURNAME'] ?></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="mb-1"><strong>Email:</strong></p>
+                                            <p class="text-muted"><?= $detail[0]['EMAIL'] ?></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="mb-1"><strong>Teléfono:</strong></p>
+                                            <p class="text-muted"><?= $detail[0]['PHONE'] ?></p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información de Envío -->
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title border-bottom pb-2">
+                                    <i class="fas fa-shipping-fast me-2"></i>Información de Envío
+                                </h5>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <p class="mb-1"><strong>Ciudad:</strong></p>
+                                        <p class="text-muted"><?= $detail[0]['CITY'] ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-1"><strong>Carrera:</strong></p>
+                                        <p class="text-muted"><?= $detail[0]['CARRER'] ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-1"><strong>Calle:</strong></p>
+                                        <p class="text-muted"><?= $detail[0]['STREET'] ?></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="mb-1"><strong>Código Postal:</strong></p>
+                                        <p class="text-muted"><?= $detail[0]['POSTAL_CODE'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estado del Envío -->
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title border-bottom pb-2">
+                            <i class="fas fa-truck me-2"></i>Estado del Envío
+                        </h5>
+                        <span class="badge bg-success"><?= $detail[0]['NAME_PURCHASING_STATUS'] ?></span>
+                    </div>
+                </div>
+
+                <!-- Información de Pago -->
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title border-bottom pb-2">
+                            <i class="fas fa-credit-card me-2"></i>Información de Pago
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <p class="mb-1"><strong>Entidad Bancaria:</strong></p>
+                                <p class="text-muted"><?= $detail[0]['BANK_ENTITY_NAME'] ?></p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="mb-1"><strong>Número de elección:</strong></p>
+                                <p class="text-muted"><?= $detail[0]['NUMBER_ELECTION'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detalle de Productos -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Detalle de Productos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Producto</th>
+                                        <th class="text-center">Precio</th>
+                                        <th class="text-center">Contenido</th>
+                                        <th class="text-center">Unidades</th>
+                                        <th class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($detail as $listCar) : ?>
+                                    <tr>
+                                        <td class="text-center"><?= $listCar['PRODUCT_NAME'] ?></td>
+                                        <td class="text-center"><?='$'.number_format($listCar['PRICE'], 0, ',') ?></td>
+                                        <td class="text-center"><?= $listCar['CONTENT'] ?></td>
+                                        <td class="text-center"><?= $listCar['UNITS'] ?></td>
+                                        <td class="text-end"><?='$'.number_format($listCar['PRICE'] * $listCar['UNITS'], 0, ',') ?></td>
+                                    </tr>
+                                    <?php $total += ($listCar['PRICE'] * $listCar['UNITS'])?>
+                                    <?php endforeach; ?>
+                                    <?php $discount = $listCar['DISCOUNT']?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen de Totales -->
+                <div class="row justify-content-end">
+                    <div class="col-md-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span>Subtotal:</span>
+                                    <strong><?='$'.number_format($total, 0, ',') ?></strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3 text-danger">
+                                    <span>Descuento:</span>
+                                    <strong><?='$'.number_format($discount, 0, ',') ?></strong>
+                                </div>
+                                <div class="d-flex justify-content-between border-top pt-3">
+                                    <h5 class="mb-0">Total a Pagar:</h5>
+                                    <h5 class="mb-0 text-success"><?='$'.number_format(($total - $discount), 0, ',') ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón Generar PDF -->
+                <div class="text-center mt-4">
+                    <a href="<?=init?><?=transaction?><?=generatePdf2?>&id=<?=$listCar['TRANSACTION_ID']?>" 
+                       class="btn btn-primary btn-lg px-5">
+                        <i class="fas fa-file-pdf me-2"></i>Generar PDF
+                    </a>
+                </div>
+            </div>
         </div>
-        <?php else : ?>
-        <div style="display: flex; justify-content: space-between;">
-            <div style="width: 30%;"><strong>Nombre:</strong>
-                <?= $detail[0]['USER_NAME'] ?>
-            </div>
-            <div style="width: 30%;"><strong>Apellidos:</strong>
-                <?= $detail[0]['SURNAME'] ?>
-            </div>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
-            <div style="width: 30%;"><strong>Correo:</strong>
-                <?= $detail[0]['EMAIL'] ?>
-            </div>
-            <div style="width: 30%;"><strong>Telefono:</strong>
-                <?= $detail[0]['PHONE'] ?>
-            </div>
-        </div>
-        <?php endif; ?>
-    </div>
-    <br>
-    <br>
-    <!-- Datos del envío -->
-    <h4 style="margin-bottom: 20px;">Datos del Envío</h4>
-    <div style="width: 80%; margin: 0 auto; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between;">
-            <div style="width: 30%;"><strong>Ciudad:</strong>
-                <?= $detail[0]['CITY'] ?>
-            </div>
-            <div style="width: 30%;"><strong>Carrera:</strong>
-                <?= $detail[0]['CARRER'] ?>
-            </div>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
-            <div style="width: 30%;"><strong>Calle:</strong>
-                <?= $detail[0]['STREET'] ?>
-            </div>
-            <div style="width: 30%;"><strong>Código Postal:</strong>
-                <?= $detail[0]['POSTAL_CODE'] ?>
+
+        <!-- Términos y Condiciones -->
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <small class="text-muted">
+                    <p class="mb-1">Términos y Condiciones:</p>
+                    <ul class="mb-0">
+                        <li>Los precios incluyen IVA</li>
+                        <li>Garantía válida por 30 días después de la compra</li>
+                        <li>Para devoluciones consulte nuestra política de retornos</li>
+                    </ul>
+                </small>
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <!-- Datos del estado del envio -->
-    <h4 style="margin-bottom: 20px;">Estado del Estado</h4>
-    <div style="margin-left: 125px;"><strong>
-            <?= $detail[0]['NAME_PURCHASING_STATUS'] ?>
-        </strong></div>
-    <br>
-    <br>
-    <!-- Datos del pago -->
-    <h4 style="margin-bottom: 20px;">Datos del Pago</h4>
-    <div style="width: 80%; margin: 0 auto; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between;">
-            <div style="width: 50%;"><strong>Entidad Bancaria:</strong>
-                <?= $detail[0]['BANK_ENTITY_NAME'] ?>
-            </div>
-            <div style="width: 50%;"><strong>Número de elección:</strong>
-                <?= $detail[0]['NUMBER_ELECTION'] ?>
-            </div>
-        </div>
-    </div>
-    <br>
-    <!-- Datos del producto -->
-    <h4 style="margin-bottom: 20px;">Datos del Producto</h4>
-    <br>
-    <div style="width: 100%; margin: 0 auto;">
-        <table style="width: 90%; border-collapse: collapse; margin: 0 auto; text-align: left;">
-            <thead style="color: black; background-color: rgb(235, 241, 241); font-size: 19px;">
-                <tr>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Producto</th>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Precio</th>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Contenido</th>
-                    <th style="padding: 8px; border: 1px solid #ddd;">Unidades</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($detail as $listCar) : ?>
-                <tr>
-                    <td style="padding: 8px; border: 1px solid #ddd;">
-                        <?= $listCar['PRODUCT_NAME'] ?>
-                    </td>
-                    <td style="padding: 8px; border: 1px solid #ddd;">
-                        <?='$'.number_format($listCar['PRICE'], 0, ','); ?>
-                    </td>
-                    <td style="padding: 8px; border: 1px solid #ddd;">
-                        <?= $listCar['CONTENT'] ?>
-                    </td>
-                    <td style="padding: 8px; border: 1px solid #ddd;">
-                        <?= $listCar['UNITS'] ?>
-                    </td>
-                </tr>
-                <?php $total += ($listCar['PRICE'] * $listCar['UNITS'])?>
-                <?php endforeach; ?>
-                <?php $discount = $listCar['DISCOUNT']?>
-            </tbody>
-        </table>
-    </div>
-    <br>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="<?=init?><?=transaction?><?=generatePdf2?>&id=<?=$listCar['TRANSACTION_ID']?>"
-            style="display: inline-block; padding: 6px 13px; background-color: #007bff; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">Generar
-            PDF</a>
-    </div>
-    <br>
-    <!-- Total -->
-    <div style="text-align: right; margin-top: 20px;">
-        <h3>Subtotal:
-            <?='$'.number_format($total, 0, ','); ?>
-        </h3>
-        <h3 class="text-danger">Descuento:
-            <?='$'.number_format($discount, 0, ','); ?>
-        </h3>
-        <h3 class="text-success">Total:
-            <?='$'.number_format(($total - $discount), 0, ','); ?>
-        </h3>
-    </div>
-    <br>
-</div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
