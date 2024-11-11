@@ -359,90 +359,93 @@
             }
         }
 
-        /*Funcion para guardar la transaccion*/
-        public function purchase(){
-            /*Instanciar modelo*/      
-            $model = new Model();
-            /*Obtener factura*/
-            $number_bill = $model -> getLastTransaction() + 1000;
-            /*Obtener comprador*/
-            $idBuyer = $_SESSION['loginsucces']['USER_ID'];
-            /*Comprobar si llegan los datos del formulario enviados por post*/
-            if(isset($_POST)){
-                /*Asignar los datos si llegan*/
-                $idDirection = isset($_POST['id_direction']) ? $_POST['id_direction'] : false;
-                $idPay = isset($_POST['id_pay']) ? $_POST['id_pay'] : false;
-                $total = isset($_POST['total']) ? $_POST['total'] : false;
-                $descuento = isset($_POST['descuento']) ? $_POST['descuento'] : false;
-                /*Comprobar si los datos llegan*/
-                if($idDirection && $idPay && $total){
-                    /*Obtener datos restantes*/
-                    $date_time = date('Y-m-d');
-                    $date_time2 = (new DateTime($date_time))->format('d/m/y');
-                    $created_at = date('Y-m-d');
-                    $created_at2 = (new DateTime($created_at))->format('d/m/y');
-                    /*Llamar la funcion del modelo que registra la transaccion*/  
-                    $resultado = $model -> registerTransaction($number_bill, $idBuyer, $idDirection, $idPay, $total, $descuento, $date_time2, $created_at2);
-                    /*Comprobar si el registrado ha sido exitoso*/                    
-                    if($resultado != false){
-                        /*Obtener la ultima transaccion registrada*/
-                        $id_transaction = $model -> getLastTransaction();
-                        /*Obtener la lista de los productos agregados al carrito*/
-                        $list = $model -> productsListCar($_SESSION['loginsucces']['USER_ID']);
-                        /*Recorrer los productos del carrito*/
-                        foreach($list as $listCar){
-                            /*Obtener el id del vendedor del producto*/
-                            $id_seller = $model -> getProductDataPu($listCar['PRODUCT_ID'])['USER_ID'];
-                            /*Comprobar si los datos llegan*/
-                            if($id_transaction && $created_at2){
-                                /*Llamar la funcion del modelo que registra la transaccion del producto*/  
-                                $resultado2 = $model -> registerTransactionProduct($id_transaction, $listCar['PRODUCT_ID'], $id_seller, 1, $listCar['AMOUNT'], $created_at2);
-                                /*Comprobar si el registrado ha sido exitoso*/   
-                                if($resultado2 != false){
-                                    /*Obtener producto en concreto*/
-                                    $product = $model -> getProduct($listCar['PRODUCT_ID']);
+       /*Funcion para guardar la transaccion*/
+       public function purchase(){
+        /*Instanciar modelo*/      
+        $model = new Model();
+        /*Obtener factura*/
+        $number_bill = $model -> getLastTransaction() + 1000;
+        /*Obtener comprador*/
+        $idBuyer = $_SESSION['loginsucces']['USER_ID'];
+        /*Comprobar si llegan los datos del formulario enviados por post*/
+        if(isset($_POST)){
+            /*Asignar los datos si llegan*/
+            $idDirection = isset($_POST['id_direction']) ? $_POST['id_direction'] : false;
+            $idPay = isset($_POST['id_pay']) ? $_POST['id_pay'] : false;
+            $total = isset($_POST['total']) ? $_POST['total'] : false;
+            $descuento = isset($_POST['descuento']) ? $_POST['descuento'] : false;
+            /*Comprobar si los datos llegan*/
+            if($idDirection && $idPay && $total){
+                /*Obtener datos restantes*/
+                $date_time = date('Y-m-d');
+                $date_time2 = (new DateTime($date_time))->format('d/m/y');
+                $created_at = date('Y-m-d');
+                $created_at2 = (new DateTime($created_at))->format('d/m/y');
+                /*Llamar la funcion del modelo que registra la transaccion*/  
+                $resultado = $model -> registerTransaction($number_bill, $idBuyer, $idDirection, $idPay, $total, $descuento, $date_time2, $created_at2);
+                /*Comprobar si el registrado ha sido exitoso*/                    
+                if($resultado != false){
+                    /*Obtener la ultima transaccion registrada*/
+                    $id_transaction = $model -> getLastTransaction();
+                    /*Obtener la lista de los productos agregados al carrito*/
+                    $list = $model -> productsListCar($_SESSION['loginsucces']['USER_ID']);
+                    /*Recorrer los productos del carrito*/
+                    foreach($list as $listCar){
+                        /*Obtener el id del vendedor del producto*/
+                        $id_seller = $model -> getProductDataPu($listCar['PRODUCT_ID'])['USER_ID'];
+                        /*Comprobar si los datos llegan*/
+                        if($id_transaction && $created_at2){
+                            /*Llamar la funcion del modelo que registra la transaccion del producto*/  
+                            $resultado2 = $model -> registerTransactionProduct($id_transaction, $listCar['PRODUCT_ID'], $id_seller, 1, $listCar['AMOUNT'], $created_at2);
+                            /*Comprobar si el registrado ha sido exitoso*/   
+                            if($resultado2 != false){
+                                /*Obtener producto en concreto*/
+                                $product = $model -> getProduct($listCar['PRODUCT_ID']);
+                                /*Validar que los usuarios externos no registren sus productos*/
+                                if($_SESSION['loginsucces']['FOUNDER'] == 1 || $_SESSION['loginsucces']['HIGHER_USER_ID'] != NULL){
                                     /*Agregar productos*/
                                     $model -> registerProduct($_SESSION['loginsucces']['USER_ID'], 1, $product['NAME'], $product['PRICE'], $product['UNITS'], $product['CONTENT'], $listCar['AMOUNT'], $product['DESCRIPTION'], $product['IMAGE'], $created_at2);
-                                    /*Llamar la funcion del modelo que decrementa el inventario*/ 
-                                    $model -> decreaseInventory($listCar['PRODUCT_ID'], $listCar['AMOUNT']);
-                                    /*Eliminar carrito*/
-                                    $model -> deleteCar($_SESSION['loginsucces']['USER_ID']);
-                                    /*Redirigir*/
-                                    header("Location:"."http://localhost/Suplement_Gym/?controller=productController&action=windowProducts");
-                                /*De lo contrario*/  
-                                }else{
-                                    /*Crear la sesion y redirigir a la ruta pertinente*/
-                                    Helps::createSessionAndRedirect("errortransaccion", "Ha ocurrido un error al realizar la compra", "?controller=transactionController&action=windowPurchase");
                                 }
+                                /*Llamar la funcion del modelo que decrementa el inventario*/ 
+                                $model -> decreaseInventory($listCar['PRODUCT_ID'], $listCar['AMOUNT']);
+                                /*Eliminar carrito*/
+                                $model -> deleteCar($_SESSION['loginsucces']['USER_ID']);
+                                /*Redirigir*/
+                                header("Location:"."http://localhost/Suplement_Gym/?controller=productController&action=windowProducts");
                             /*De lo contrario*/  
                             }else{
                                 /*Crear la sesion y redirigir a la ruta pertinente*/
-                                Helps::createSessionAndRedirect("errortransaccion", "Ha ocurrido un error inesperado", "?controller=transactionController&action=windowPurchase");
+                                Helps::createSessionAndRedirect("errortransaccion", "Ha ocurrido un error al realizar la compra", "?controller=transactionController&action=windowPurchase");
                             }
+                        /*De lo contrario*/  
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Helps::createSessionAndRedirect("errortransaccion", "Ha ocurrido un error inesperado", "?controller=transactionController&action=windowPurchase");
                         }
-                        /*Comprobar si el producto tiene vendedor*/
-                        if($id_seller != null){
-                            /*Llamar la funcion que aumenta las ganancias del vendedor*/
-                            $model -> increaseProfits($id_seller, $total);
-                            /*Incrementar comisiones y porcentajes*/
-                            $model -> distribuiteEarnings($_SESSION['loginsucces']['USER_ID'], $id_seller, $total);
-                        }
-                    /*De lo contrario*/  
-                    }else{
-                        /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Helps::createSessionAndRedirect("errortransaccion", "Ha ocurrido un error inesperado", "?controller=transactionController&action=windowPurchase");
+                    }
+                    /*Comprobar si el producto tiene vendedor*/
+                    if($id_seller != null){
+                        /*Llamar la funcion que aumenta las ganancias del vendedor*/
+                        $model -> increaseProfits($id_seller, $total);
+                        /*Incrementar comisiones y porcentajes*/
+                        $model -> distribuiteEarnings($_SESSION['loginsucces']['USER_ID'], $id_seller, $total);
                     }
                 /*De lo contrario*/  
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/
-                    Helps::createSessionAndRedirect("errortransaccion", "Ha ocurdrido un error inesperado", "?controller=transactionController&action=windowPurchase");
+                    Helps::createSessionAndRedirect("errortransaccion", "Ha ocurrido un error inesperado", "?controller=transactionController&action=windowPurchase");
                 }
             /*De lo contrario*/  
             }else{
                 /*Crear la sesion y redirigir a la ruta pertinente*/
-                Helps::createSessionAndRedirect("errortransaccion", "Ha ocurrido un error inesperado", "?controller=transactionController&action=windowPurchase");
+                Helps::createSessionAndRedirect("errortransaccion", "Ha ocurdrido un error inesperado", "?controller=transactionController&action=windowPurchase");
             }
+        /*De lo contrario*/  
+        }else{
+            /*Crear la sesion y redirigir a la ruta pertinente*/
+            Helps::createSessionAndRedirect("errortransaccion", "Ha ocurrido un error inesperado", "?controller=transactionController&action=windowPurchase");
         }
+    }
 
         /*Funcion para cambiar el estado de la compra*/
         public function changeStatus(){

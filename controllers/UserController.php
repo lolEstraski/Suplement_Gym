@@ -336,7 +336,7 @@
             /*Obtener usuario logueado*/
             $user = $_SESSION['loginsucces'];
             /*Comprobar si el dato existe*/
-            $user_id = isset($user['ID']) ? $user['ID'] : false;
+            $user_id = isset($user['USER_ID']) ? $user['USER_ID'] : false;
             $name = isset($_POST['name']) ? $_POST['name'] : false;
             $surname = isset($_POST['surname']) ? $_POST['surname'] : false;
             $phone = isset($_POST['phone']) ? $_POST['phone'] : false;
